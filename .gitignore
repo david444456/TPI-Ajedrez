@@ -1,3 +1,5 @@
+
+lib/googletest-master/googlemock/build-aux/.keep
 # Ignore CI build directory
 build/
 xcuserdata
