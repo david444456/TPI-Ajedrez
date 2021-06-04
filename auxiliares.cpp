@@ -66,7 +66,9 @@ int aparicionesEnTablero(tablero t, casilla c){
 
 bool cantidadValidaDePiezas(tablero t){
     bool res = false;
-    res = aparicionesEnTablero(t, make_pair (4,1)) == 1;
+    res = aparicionesEnTablero(t, make_pair (4,1)) == 1
+            && aparicionesEnTablero(t, make_pair (4,2)) == 1;
+
     return res;
 }
 
