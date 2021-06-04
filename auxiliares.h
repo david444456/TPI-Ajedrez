@@ -14,4 +14,5 @@ vector<pair<int,int>> ordenarVectorPares(vector<pair<int,int>> &v);
 tablero inicializarTablero();
 coordenada setCoord(int i, int j);
 tablero tableroActual ( posicion const &p );
+bool esTableroValido(tablero t);
 #endif //AJEDREZLITE_AUXILIARES_H

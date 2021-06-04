@@ -1,9 +1,12 @@
 #include <algorithm>
 #include "ejercicios.h"
+#include "auxiliares.h"
 
 // EJERCICIO 1
 bool posicionValida ( pair < tablero, int > const &p ) {
     bool resp = false;
+    resp = p.second == 1 || p.second == 0;
+    resp = esTableroValido(p.first);
     // completar codigo
     return resp;
 }

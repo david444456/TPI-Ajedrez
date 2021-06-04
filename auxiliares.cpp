@@ -27,3 +27,51 @@ tablero inicializarTablero(){
     tablero out(ANCHO_TABLERO, fila);
     return out;
 }
+
+bool esMatriz(tablero t){
+    bool res = true;
+    for(int i = 0; i<t.size(); i++){
+        if(t.size() != t[i].size()){
+            res = false;
+        }
+    }
+    return res;
+}
+
+bool casillasValidas(tablero t){
+    bool res = true;
+    for(int i = 0; i<t.size(); i++){
+        for(int j = 0; j<t[i].size(); j++){
+            if (t[i][j].first < 1 && t[i][j].first > 4
+                && t[i][j].second < 1 && t[i][j].second > 2
+                || (t[i][j].first == 0 && t[i][j].second ==0)){
+                res = false;
+            }
+        }
+    }
+    return res;
+}
+
+int aparicionesEnTablero(tablero t, casilla c){
+    int suma = 0;
+    for(int i = 0; i<t.size(); i++){
+        for(int j = 0; j<t[i].size(); j++){
+            if(t[i][j] == c){
+                suma++;
+            }
+        }
+    }
+    return suma;
+}
+
+bool cantidadValidaDePiezas(tablero t){
+    bool res = false;
+    res = aparicionesEnTablero(t, make_pair (4,1)) == 1;
+    return res;
+}
+
+bool esTableroValido(tablero t){
+    bool res = true;
+    res = esMatriz(t) && casillasValidas(t);
+    return res;
+}
