@@ -100,3 +100,126 @@ bool esTableroValido(tablero t){
     res = res && sinPeonesNoCoronados(t);
     return res;
 }
+
+///////ejercicio 3
+
+/*
+bool enRango (int x, int m1, int m2) {
+    return ( m1 < x && x < m2 ) || ( m2 < x && x < m1 );
+}
+
+bool coordenadaEnRango(coordenada c){
+    return 0 <= c.first  && c.first < DIM && 0 <= c.second && c.second < DIM ;
+}
+
+int abs(int n){
+    if(n<0){
+        n = -n;
+    }
+    return n;
+}
+
+int #apariciones(){}
+
+int color(tablero t, coordenada c){
+    return t[c.first][c.second].second;
+}
+
+bool casillaVacia(tablero t, coordenada c){
+    return t[c.first][c.second] == cVACIA;
+}
+
+int pieza (tablero t, coordenada c){
+    return (t[c.first][c.second]).first;
+}
+
+bool movimientoAlfilValido (tablero t,coordenada o, coordenada d) {
+    bool res = true;
+    for(int x =0; enRango(x, 0, d.first - o.first); x++){
+        for(int y = 0; enRango(y, 0, d.second - o.second); y++){
+            if(abs(x) == abs(y)){
+                res = res && casillaVacia(t, setCoord(o.first + x, o.second + y));
+            }
+        }
+    }
+    res = res && (abs(d.first - o.first) == abs(d.second - o.second));
+    return res;
+}
+
+bool mueveEnHorizontal (coordenada o, coordenada d) {
+    return abs(o.first - d.first) == 0 || abs(o.second - d.second) == 1;
+}
+
+bool mueveEnDiagonal (coordenada o, coordenada d) {
+    return abs(o.first - d.first) == 1 && abs(o.second - d.second) == 1;
+}
+bool mueveEnVertical (coordenada o, coordenada d) {
+    return abs(o.first - d.first) == 1 && abs(o.second - d.second) == 0;
+}
+bool movimientoReyValido (coordenada o, coordenada d){
+    return mueveEnDiagonal(o, d) || mueveEnVertical(o, d) || mueveEnHorizontal(o, d);
+}
+
+bool movimientoPeonValido (int color, coordenada o, coordenada d) {
+    return d.second == o.second && ((color == BLANCO && d.first == o.first - 1) || (color = NEGRO && d.first == o.first + 1));
+}
+
+bool capturaPeonValida ( tablero t, coordenada o, coordenada d) {
+    return abs(d.first - o.first) == 1 && ((color(t, o) == BLANCO && d.second == o.second - 1) || (color(t, o) == NEGRO && d.second == o.second + 1));
+}
+
+bool movimientoTorreValido (tablero t, coordenada o, coordenada d) {
+    bool res = true;
+    if(d.second == o.second){
+        for(int x=0;enRango(x, o.first, d.first);x++){
+            res = res && casillaVacia(t, setCoord(x, o.second));
+        }
+    }else if(d.first == o.first){
+        for(int y=0;enRango(y, o.second, d.second);y++){
+            res = res && casillaVacia(t, setCoord(o.first, y));
+        }
+    }else{
+        res= false;
+    }
+    return res;
+}
+
+bool movimientoPiezaValido (tablero t, coordenada o, coordenada d){
+    return (pieza(t, o) == PEON && movimientoPeonValido(color(t, o), o, d)) ||
+            (pieza(t, o) == ALFIL && movimientoAlfilValido(t, o, d)) ||
+             (pieza(t, o) == TORRE && movimientoTorreValido(t, o, d)) ||
+              (pieza(t, o) == REY && movimientoReyValido(o, d));
+}
+
+bool casillaAtacada (tablero t, coordenada o, coordenada d) {
+    return !casillaVacia(t, o) && ((pieza(t, o) == PEON && movimientoPiezaValido(t, o, d)) || (pieza(t, o) == PEON && capturaPeonValida(t, o, d)));
+}
+
+bool sonCasillasAtacadas (tablero t, jugador j, vector<coordenada> atacadas) {
+    bool res = false;
+    for(int x = 0;x < DIM;x++){
+          for(int y = 0;y < DIM;y++){
+              coordenada c = setCoord(x,y);
+              bool atacadaEnTablero = false;
+              for(int i =0;i < DIM;i++){
+                  for(int j=0;j < DIM;j++){
+                      coordenada o = setCoord(i,j);
+                      if(c!=o  && color(t, o) == jugador && casillaAtacada(t, o,c)){
+                          res = true;
+                      }
+                  }
+              }
+              int aparicionesEnLista = 0;
+              for(int r = 0; r<atacadas.size(); r++){
+                  if(atacadas[r] == c){
+                      aparicionesEnLista++;
+                  }
+              }
+              res = res && ( (atacadaEnTablero && (aparicionesEnLista == 1)) || (!atacadaEnTablero && !(aparicionesEnLista == 1)) );
+          }
+    }
+    return res;
+}
+
+*/
+///////fin ejercicio 3
