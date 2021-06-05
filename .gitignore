@@ -44,3 +44,4 @@ googletest/m4/lt~obsolete.m4
 # Ignore generated directories.
 googlemock/fused-src/
 googletest/fused-src/
+cmake-build-debug/CMakeFiles/Makefile2

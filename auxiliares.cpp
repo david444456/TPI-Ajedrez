@@ -42,9 +42,9 @@ bool casillasValidas(tablero t){
     bool res = true;
     for(int i = 0; i<t.size(); i++){
         for(int j = 0; j<t[i].size(); j++){
-            if (t[i][j].first < 1 && t[i][j].first > 4
-                && t[i][j].second < 1 && t[i][j].second > 2
-                || (t[i][j].first == 0 && t[i][j].second ==0)){
+            if ((t[i][j].first < 1 && t[i][j].first > 4
+                && t[i][j].second < 1 && t[i][j].second > 2)
+                && !(t[i][j].first == 0 && t[i][j].second == 0)){
                 res = false;
             }
         }
@@ -66,14 +66,37 @@ int aparicionesEnTablero(tablero t, casilla c){
 
 bool cantidadValidaDePiezas(tablero t){
     bool res = false;
-    res = aparicionesEnTablero(t, make_pair (4,1)) == 1
-            && aparicionesEnTablero(t, make_pair (4,2)) == 1;
+    res = aparicionesEnTablero(t, make_pair (4,1)) == 1                     //rey
+            && aparicionesEnTablero(t, make_pair (4,2)) == 1                //rey
+               && aparicionesEnTablero(t, make_pair (1,1)) <= 8             //peon
+                  && aparicionesEnTablero(t, make_pair (1,2)) <= 8          //peon
+                    && aparicionesEnTablero(t, make_pair (2,1)) <= 2        //alfil
+                        && aparicionesEnTablero(t, make_pair (2,2)) <= 2;   //alfil
 
+    //torre
+    res = res && aparicionesEnTablero(t, make_pair (3,1)) <= 2 + (8-aparicionesEnTablero(t, make_pair (1,1)))
+            && aparicionesEnTablero(t, make_pair (3,2)) <= 2+ (8-aparicionesEnTablero(t, make_pair (1,2)));
+
+    return res;
+}
+
+bool sinPeonesNoCoronados(tablero t){
+    bool res = true;
+    for(int i = 0; i<t.size(); i += 7){
+        for(int j = 0; j<t[i].size(); j++){
+            if(t[i][j].first == 1){
+                res = false;
+            }
+        }
+    }
     return res;
 }
 
 bool esTableroValido(tablero t){
     bool res = true;
-    res = esMatriz(t) && casillasValidas(t);
+    res = esMatriz(t);
+    res = res && casillasValidas(t);
+    res = res && cantidadValidaDePiezas(t);
+    res = res && sinPeonesNoCoronados(t);
     return res;
 }
