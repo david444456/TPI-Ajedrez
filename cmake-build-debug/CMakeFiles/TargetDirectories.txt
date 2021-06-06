@@ -1,29 +1,29 @@
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/CMakeFiles/ajedrezLite.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/CMakeFiles/install/local.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/CMakeFiles/install.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/CMakeFiles/list_install_components.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/CMakeFiles/install/strip.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/CMakeFiles/install/local.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/CMakeFiles/install.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/CMakeFiles/edit_cache.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/CMakeFiles/rebuild_cache.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/CMakeFiles/list_install_components.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/CMakeFiles/install/strip.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/install/local.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/install.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/edit_cache.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/gmock_main.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/gmock.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/rebuild_cache.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/list_install_components.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/install/strip.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/list_install_components.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/gtest.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/gtest_main.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/install/local.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/install.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/edit_cache.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/rebuild_cache.dir
-C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/install/strip.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/CMakeFiles/ajedrezLite.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/CMakeFiles/install/local.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/CMakeFiles/install.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/CMakeFiles/list_install_components.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/CMakeFiles/install/strip.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/CMakeFiles/install/local.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/CMakeFiles/install.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/CMakeFiles/edit_cache.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/CMakeFiles/rebuild_cache.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/CMakeFiles/list_install_components.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/CMakeFiles/install/strip.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/install/local.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/install.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/edit_cache.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/gmock_main.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/gmock.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/rebuild_cache.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/list_install_components.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/install/strip.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/list_install_components.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/gtest.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/gtest_main.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/install/local.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/install.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/edit_cache.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/rebuild_cache.dir
+C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/install/strip.dir

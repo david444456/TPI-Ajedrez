@@ -1,4 +1,4 @@
-# Install script for directory: C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/lib/googletest-master/googletest
+# Install script for directory: C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/lib/googletest-master/googletest
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -32,22 +32,27 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/libgtestd.a")
+# Set default install directory permissions.
+if(NOT DEFINED CMAKE_OBJDUMP)
+  set(CMAKE_OBJDUMP "C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/objdump.exe")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/libgtest_maind.a")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/libgtestd.a")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/lib/googletest-master/googletest/include/gtest")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/libgtest_maind.a")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/lib/googletest-master/googletest/include/gtest")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES
-    "C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/gtest.pc"
-    "C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/gtest_main.pc"
+    "C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/gtest.pc"
+    "C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/gtest_main.pc"
     )
 endif()
 

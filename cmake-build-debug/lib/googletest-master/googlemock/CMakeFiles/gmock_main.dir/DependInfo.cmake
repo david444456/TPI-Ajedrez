@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/lib/googletest-master/googlemock/src/gmock_main.cc" "C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.obj"
+  "C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/lib/googletest-master/googlemock/src/gmock_main.cc" "C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -18,8 +18,8 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/gmock.dir/DependInfo.cmake"
-  "C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/gtest.dir/DependInfo.cmake"
+  "C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/CMakeFiles/gmock.dir/DependInfo.cmake"
+  "C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/gtest.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

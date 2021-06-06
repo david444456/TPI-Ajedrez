@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/lib/googletest-master/googletest/src/gtest-all.cc" "C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.obj"
+  "C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/lib/googletest-master/googletest/src/gtest-all.cc" "C:/Users/Naty/Documents/GitHub/TPI-Ajedrez/cmake-build-debug/lib/googletest-master/googlemock/gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
