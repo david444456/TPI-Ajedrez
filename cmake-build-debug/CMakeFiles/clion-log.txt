@@ -1,4 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2020.2.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" "C:\salvar\Pendryve\docvarios\uba\TPI Ajedrez\TPI Ajedrez"
--- Configuring done
--- Generating done
--- Build files have been written to: C:/salvar/Pendryve/docvarios/uba/TPI Ajedrez/TPI Ajedrez/cmake-build-debug
