@@ -14,7 +14,7 @@ bool posicionValida ( pair < tablero, int > const &p ) {
 // EJERCICIO 2
 bool posicionInicial ( posicion const &p ) {
     bool resp = false;
-    // completar codigo
+
     return resp;
 }
 
