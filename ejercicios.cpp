@@ -14,6 +14,7 @@ bool posicionValida ( pair < tablero, int > const &p ) {
 // EJERCICIO 2
 bool posicionInicial ( posicion const &p ) {
     bool resp = false;
+
     // completar codigo
     return resp;
 }
@@ -21,14 +22,22 @@ bool posicionInicial ( posicion const &p ) {
 // EJERCICIO 3
 vector <coordenada> casillasAtacadas ( posicion const &p, int j ) {
     vector <coordenada> cA;
-    // completar codigo
+    for(int i = 0; i<p.first.size(); i++){
+        for(int j = 0; j<p.first[i].size(); j++){
+            coordenada c = setCoord(i,j);
+            cA.push_back(c);
+            if( !sonCasillasAtacadas(p.first,p.second,cA) ){
+                cA.pop_back();
+            }
+        }
+    }
     return cA;
 }
 
 // EJERCICIO 4
 bool posicionSiguienteCorrecta ( posicion const &p1, posicion const &p2, coordenada o, coordenada d ) {
     bool resp = false;
-    resp = posicionSiguiente(p1,p2,0,d);
+    //resp = posicionSiguiente(p1,p2,o,d);
     // completar codigo
     return resp;
 }

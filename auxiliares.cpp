@@ -103,7 +103,9 @@ bool esTableroValido(tablero t){
 
 ///////ejercicio 3
 
-/*
+#define DIM 8
+#define jugador int
+
 bool enRango (int x, int m1, int m2) {
     return ( m1 < x && x < m2 ) || ( m2 < x && x < m1 );
 }
@@ -119,7 +121,14 @@ int abs(int n){
     return n;
 }
 
-int #apariciones(){}
+int apariciones(vector<coordenada> v, coordenada c ){
+        int res = 0;
+        for(int i =0; i<v.size(); i++){
+            if(v[i] == c)
+                res++;
+        }
+        return res;
+}
 
 int color(tablero t, coordenada c){
     return t[c.first][c.second].second;
@@ -192,11 +201,11 @@ bool movimientoPiezaValido (tablero t, coordenada o, coordenada d){
 }
 
 bool casillaAtacada (tablero t, coordenada o, coordenada d) {
-    return !casillaVacia(t, o) && ((pieza(t, o) == PEON && movimientoPiezaValido(t, o, d)) || (pieza(t, o) == PEON && capturaPeonValida(t, o, d)));
+    return !casillaVacia(t, o) && ((pieza(t, o) != PEON && movimientoPiezaValido(t, o, d)) || (pieza(t, o) != PEON && capturaPeonValida(t, o, d)));
 }
 
 bool sonCasillasAtacadas (tablero t, jugador j, vector<coordenada> atacadas) {
-    bool res = false;
+    bool res = true;
     for(int x = 0;x < DIM;x++){
           for(int y = 0;y < DIM;y++){
               coordenada c = setCoord(x,y);
@@ -204,42 +213,46 @@ bool sonCasillasAtacadas (tablero t, jugador j, vector<coordenada> atacadas) {
               for(int i =0;i < DIM;i++){
                   for(int j=0;j < DIM;j++){
                       coordenada o = setCoord(i,j);
-                      if(c!=o  && color(t, o) == jugador && casillaAtacada(t, o,c)){
-                          res = true;
+                      if(c==o && color(t, o) != j && !casillaAtacada(t, o,c)){
+                          res = false;
                       }
                   }
               }
-              int aparicionesEnLista = 0;
-              for(int r = 0; r<atacadas.size(); r++){
-                  if(atacadas[r] == c){
-                      aparicionesEnLista++;
-                  }
-              }
-              res = res && ( (atacadaEnTablero && (aparicionesEnLista == 1)) || (!atacadaEnTablero && !(aparicionesEnLista == 1)) );
+
+              res = res && ( (atacadaEnTablero && (apariciones(atacadas, c) == 1)) || (!atacadaEnTablero && !(apariciones(atacadas, c) == 1)) );
           }
     }
     return res;
 }
 
-*/
 ///////fin ejercicio 3
 
-
+/*
 //ej 4
+bool pertenece(vector<coordenada>c,coordenada d){
+    bool res= false;
+    for(int i=0; i<c.size(); i++){
+        if(c[i]==d){
+            res= true;
+        }
+    }
+    return res;
+}
+
 bool posicionSiguiente (posicion p, posicion q, coordenada o, coordenada d){
     return (posicionesIgualesExceptoEn()&& casillaVacia(q.first,o)&&(esMovimientoValido(p,o,d)))||(esCapturaValida(p,o,d)&&piezaCorrectaEnDestino(p,q,o,d))
 }
 
 
 bool posicionesIgualesExceptoEn (posicion p, posicion q,vector<coordenada> C) {
+    bool res=true;
     for (int x = 0; x < DIM; x++) {
         for (int y = 0; y < DIM; y++) {
             coordenada c = setCoord(x, y);
-            if (c != C) {
-                if (pieza(p.first, c) == pieza(q.first, c) && color(p.first, c) = color(q.first, c)) {
-                    res = true;
+            if (!pertenece(C,c)) {
+                if (pieza(p.first, c) != pieza(q.first, c) || color(p.first, c) != color(q.first, c)) {
+                    res = false;
                 }
-                res = true;
             }
         }
     }
@@ -264,3 +277,4 @@ bool piezaCorrectaEnDestino(posicion p, posicion q, coordenada o, coordenada d){
 bool enLineaFinalInicial(coordenada c){
     return (c.first==0 || c.first==DIM-1)
 }
+*/
