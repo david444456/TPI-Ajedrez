@@ -109,6 +109,18 @@ bool piezaEnCoordenada(tablero t, coordenada c, int pieza, int color){
     return t[c.first][c.second].first == pieza && t[c.first][c.second].second == color;
 }
 
+bool cantidadDePiezasAlInicio(tablero t){
+    bool res = false;
+    res = aparicionesEnTablero(t, make_pair (TORRE,NEGRO)) == 2                     //torre
+          && aparicionesEnTablero(t, make_pair (TORRE,BLANCO)) == 2                //torre
+          && aparicionesEnTablero(t, make_pair (PEON,NEGRO)) == 8             //peon
+          && aparicionesEnTablero(t, make_pair (PEON,BLANCO)) == 8          //peon
+          && aparicionesEnTablero(t, make_pair (ALFIL,NEGRO)) == 2        //alfil
+          && aparicionesEnTablero(t, make_pair (ALFIL,BLANCO)) == 2;   //alfil
+
+          return res;
+}
+
 bool piezasEnCoordenadas(tablero t){
     bool resp = true;
 
@@ -122,16 +134,61 @@ bool piezasEnCoordenadas(tablero t){
     if(!piezaEnCoordenada(t, make_pair(0,0), TORRE, NEGRO)) resp = false;
     if(!piezaEnCoordenada(t, make_pair(0,DIM-1), TORRE, NEGRO)) resp = false;
 
-    if(!piezaEnCoordenada(t, make_pair(7,0), TORRE, NEGRO)) resp = false;
-    if(!piezaEnCoordenada(t, make_pair(DIM-1,DIM-1), TORRE, NEGRO)) resp = false;
+    if(!piezaEnCoordenada(t, make_pair(7,0), TORRE, BLANCO)) resp = false;
+    if(!piezaEnCoordenada(t, make_pair(DIM-1,DIM-1), TORRE, BLANCO)) resp = false;
 
     //alfil
 
-    if(!piezaEnCoordenada(t, make_pair(0,2), TORRE, NEGRO)) resp = false;
-    if(!piezaEnCoordenada(t, make_pair(0,DIM-2), TORRE, NEGRO)) resp = false;
+    if(!piezaEnCoordenada(t, make_pair(0,2), ALFIL, NEGRO)) resp = false;
+    if(!piezaEnCoordenada(t, make_pair(0,DIM-3), ALFIL, NEGRO)) resp = false;
 
-    if(!piezaEnCoordenada(t, make_pair(DIM-1,0), TORRE, NEGRO)) resp = false;
-    if(!piezaEnCoordenada(t, make_pair(DIM-1,DIM-1), TORRE, NEGRO)) resp = false;
+    if(!piezaEnCoordenada(t, make_pair(DIM-1,2), ALFIL, BLANCO)) resp = false;
+    if(!piezaEnCoordenada(t, make_pair(DIM-1,DIM-3), ALFIL, BLANCO)) resp = false;
+
+    //rey
+    if(!piezaEnCoordenada(t, make_pair(0,4), REY, NEGRO)) resp = false;
+    if(!piezaEnCoordenada(t, make_pair(DIM-1,4), REY, BLANCO)) resp = false;
+
+    return resp;
+}
+
+void ObtenerTableroOrdenado(tablero& t){
+    //preparo
+    vector<int> auxCount(DIM-1, 0);
+
+    vector<vector<int>> colorCount;
+    vector<int> maxColor (3, 0);
+
+    for(int i = 0; i< DIM-1; i++){
+        colorCount.push_back(maxColor);
+    }
+
+    //funcionamiento metodo
+    for(int i = 0; i<t.size(); i++){
+        //counting
+        for(int j = 0; j < t[0].size(); j++){
+            if(t[i][j].first != 0){
+                auxCount[t[i][j].first]++;
+                colorCount[t[i][j].first][t[i][j].second] ++;
+            }
+        }
+        //set
+        int aparPieza = 0;
+        int aparColor = 1;
+        for(int j = 0; j < t[i].size(); j++){
+            if(t[i][j].first != 0){
+                while(auxCount[aparPieza] <= 0 && aparPieza < DIM){
+                    aparPieza++;
+                }
+                while(colorCount[aparPieza][aparColor] <= 0 && aparColor < 3){
+                    aparColor++;
+                }
+                t[i][j] = make_pair(aparPieza, aparColor);
+                auxCount[aparPieza]--;
+                colorCount[aparPieza][aparColor]--;
+            }
+        }
+    }
 }
 
 ///////ejercicio 3
@@ -257,7 +314,7 @@ bool sonCasillasAtacadas (tablero t, jugador j, vector<coordenada> atacadas) {
 */
 ///////fin ejercicio 3
 
-
+/*
 //ej 4
 bool posicionSiguiente (posicion p, posicion q, coordenada o, coordenada d){
     return (posicionesIgualesExceptoEn()&& casillaVacia(q.first,o)&&(esMovimientoValido(p,o,d)))||(esCapturaValida(p,o,d)&&piezaCorrectaEnDestino(p,q,o,d))
@@ -296,4 +353,4 @@ bool piezaCorrectaEnDestino(posicion p, posicion q, coordenada o, coordenada d){
 }
 bool enLineaFinalInicial(coordenada c){
     return (c.first==0 || c.first==DIM-1)
-}
+}*/
