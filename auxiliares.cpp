@@ -136,7 +136,9 @@ bool piezasEnCoordenadas(tablero t){
 
 ///////ejercicio 3
 
-/*
+#define jugador int
+#define DIM 8
+
 bool enRango (int x, int m1, int m2) {
     return ( m1 < x && x < m2 ) || ( m2 < x && x < m1 );
 }
@@ -152,7 +154,14 @@ int abs(int n){
     return n;
 }
 
-int #apariciones(){}
+int apariciones(vector<coordenada> v, coordenada c ){
+    int res = 0;
+    for(int i =0; i<v.size(); i++){
+        if(v[i] == c)
+            res++;
+    }
+    return res;
+}
 
 int color(tablero t, coordenada c){
     return t[c.first][c.second].second;
@@ -229,7 +238,7 @@ bool casillaAtacada (tablero t, coordenada o, coordenada d) {
 }
 
 bool sonCasillasAtacadas (tablero t, jugador j, vector<coordenada> atacadas) {
-    bool res = false;
+    bool res = true;
     for(int x = 0;x < DIM;x++){
           for(int y = 0;y < DIM;y++){
               coordenada c = setCoord(x,y);
@@ -237,30 +246,25 @@ bool sonCasillasAtacadas (tablero t, jugador j, vector<coordenada> atacadas) {
               for(int i =0;i < DIM;i++){
                   for(int j=0;j < DIM;j++){
                       coordenada o = setCoord(i,j);
-                      if(c!=o  && color(t, o) == jugador && casillaAtacada(t, o,c)){
-                          res = true;
+                      if(c!=o  && color(t, o) == j && casillaAtacada(t, o,c)){
+                          atacadaEnTablero = true;
                       }
                   }
               }
-              int aparicionesEnLista = 0;
-              for(int r = 0; r<atacadas.size(); r++){
-                  if(atacadas[r] == c){
-                      aparicionesEnLista++;
-                  }
-              }
-              res = res && ( (atacadaEnTablero && (aparicionesEnLista == 1)) || (!atacadaEnTablero && !(aparicionesEnLista == 1)) );
+
+              res = res && ( (atacadaEnTablero && (apariciones (atacadas,c)== 1)) || (!atacadaEnTablero && !(apariciones (atacadas,c)== 1)) );
           }
     }
     return res;
 }
 
-*/
+
 ///////fin ejercicio 3
 
-
+/*
 //ej 4
 bool posicionSiguiente (posicion p, posicion q, coordenada o, coordenada d){
-    return (posicionesIgualesExceptoEn()&& casillaVacia(q.first,o)&&(esMovimientoValido(p,o,d)))||(esCapturaValida(p,o,d)&&piezaCorrectaEnDestino(p,q,o,d))
+    return (posicionesIgualesExceptoEn(p,q,)&& casillaVacia(q.first,o)&&(esMovimientoValido(p,o,d)))||(esCapturaValida(p,o,d)&&piezaCorrectaEnDestino(p,q,o,d))
 }
 
 
@@ -297,3 +301,5 @@ bool piezaCorrectaEnDestino(posicion p, posicion q, coordenada o, coordenada d){
 bool enLineaFinalInicial(coordenada c){
     return (c.first==0 || c.first==DIM-1)
 }
+
+*/
