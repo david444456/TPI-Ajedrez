@@ -3,6 +3,8 @@
 
 #include "definiciones.h"
 
+#define jugador int
+
 bool posicionValida ( pair < tablero, int > const &p );
 bool posicionInicial ( posicion const &p );
 vector < coordenada > casillasAtacadas ( posicion const &p, int j );
@@ -15,5 +17,6 @@ bool hayJaqueDescubierto ( posicion const &p );
 void ejecutarSecuenciaForzada ( posicion &p, secuencia s );
 int seVieneElJaqueEn ( posicion const & p );
 void ObtenerTableroOrdenado(tablero& t);
+bool sonCasillasAtacadas (tablero t, jugador j, vector<coordenada> atacadas);
 
 #endif //
