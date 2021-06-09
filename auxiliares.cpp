@@ -1,6 +1,8 @@
 #include "definiciones.h"
 #include "auxiliares.h"
 
+int DIM = 8;
+
 using namespace std;
 // aqui se pueden ubicar todas las funciones auxiliares de soporte para la resolucion de los ejercicios
 pair<int,int> mp(int a, int b) {
@@ -99,6 +101,37 @@ bool esTableroValido(tablero t){
     res = res && cantidadValidaDePiezas(t);
     res = res && sinPeonesNoCoronados(t);
     return res;
+}
+
+///ejerc 2
+
+bool piezaEnCoordenada(tablero t, coordenada c, int pieza, int color){
+    return t[c.first][c.second].first == pieza && t[c.first][c.second].second == color;
+}
+
+bool piezasEnCoordenadas(tablero t){
+    bool resp = true;
+
+    //peones
+    for(int i = 1; i<DIM; i++){
+        if(!piezaEnCoordenada(t, make_pair(1,i), PEON, NEGRO)) resp = false;
+        if(!piezaEnCoordenada(t, make_pair(6,i), PEON, BLANCO)) resp = false;
+    }
+
+    //torre
+    if(!piezaEnCoordenada(t, make_pair(0,0), TORRE, NEGRO)) resp = false;
+    if(!piezaEnCoordenada(t, make_pair(0,DIM-1), TORRE, NEGRO)) resp = false;
+
+    if(!piezaEnCoordenada(t, make_pair(7,0), TORRE, NEGRO)) resp = false;
+    if(!piezaEnCoordenada(t, make_pair(DIM-1,DIM-1), TORRE, NEGRO)) resp = false;
+
+    //alfil
+
+    if(!piezaEnCoordenada(t, make_pair(0,2), TORRE, NEGRO)) resp = false;
+    if(!piezaEnCoordenada(t, make_pair(0,DIM-2), TORRE, NEGRO)) resp = false;
+
+    if(!piezaEnCoordenada(t, make_pair(DIM-1,0), TORRE, NEGRO)) resp = false;
+    if(!piezaEnCoordenada(t, make_pair(DIM-1,DIM-1), TORRE, NEGRO)) resp = false;
 }
 
 ///////ejercicio 3

@@ -1,4 +1,5 @@
 
+cmake-build-debug/
 lib/googletest-master/googlemock/build-aux/.keep
 # Ignore CI build directory
 build/
@@ -44,4 +45,5 @@ googletest/m4/lt~obsolete.m4
 # Ignore generated directories.
 googlemock/fused-src/
 googletest/fused-src/
+cmake-build-debug/CMakeFiles/Makefile2
 cmake-build-debug/CMakeFiles/Makefile2

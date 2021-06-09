@@ -16,6 +16,7 @@ bool posicionInicial ( posicion const &p ) {
     bool resp = false;
 
     // completar codigo
+
     return resp;
 }
 
