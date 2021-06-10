@@ -46,4 +46,12 @@ bool casillaAtacada (tablero t, coordenada o, coordenada d) ;
 bool sonCasillasAtacadas (tablero t, jugador j, vector<coordenada> atacadas);
 
 //fin ejercicio 3
+// ejercicio 4
+bool posicionSiguienteCorrecta ( posicion const &p1, posicion const &p2, coordenada o, coordenada d );
+bool piezaCorrectaEnDestino(posicion p, posicion q, coordenada o, coordenada d);
+bool esCapturaValida(posicion p, coordenada o,coordenada d);
+bool esMovimientoValido(posicion p, coordenada o, coordenada d);
+bool pertenece(vector<coordenada>c,coordenada d);
+bool posicionesIgualesExceptoEn (posicion p, posicion q,vector<coordenada> C);
+bool posicionSiguiente (posicion p, posicion q, coordenada o, coordenada d);
 #endif //
