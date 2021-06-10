@@ -6,7 +6,7 @@
 bool posicionValida ( pair < tablero, int > const &p ) {
     bool resp = false;
     resp = p.second == 1 || p.second == 2;
-    resp = esTableroValido(p.first);
+    resp = resp && esTableroValido(p.first);
     // completar codigo
     return resp;
 }

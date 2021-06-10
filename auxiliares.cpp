@@ -152,6 +152,8 @@ bool piezasEnCoordenadas(tablero t){
     return resp;
 }
 
+//ejer 5
+
 void ObtenerTableroOrdenado(tablero& t){
     //preparo
     vector<int> auxCount(DIM-1, 0);
@@ -328,19 +330,49 @@ bool sonCasillasAtacadas (tablero t, jugador j, vector<coordenada> atacadas) {
 
 ///////fin ejercicio 3
 
-/*
+
 //ej 4
-bool posicionSiguiente (posicion p, posicion q, coordenada o, coordenada d){
-    return (posicionesIgualesExceptoEn(p,q,)&& casillaVacia(q.first,o)&&(esMovimientoValido(p,o,d)))||(esCapturaValida(p,o,d)&&piezaCorrectaEnDestino(p,q,o,d))
+
+bool enLineaFinalInicial(coordenada c){
+    return (c.first==0 || c.first==DIM-1);
 }
 
+bool piezaCorrectaEnDestino(posicion p, posicion q, coordenada o, coordenada d){
+    return (color(p.first,d)==color(q.first,d)
+    && (enLineaFinalInicial(d)
+    && pieza(q.first,d)==TORRE)
+    || enLineaFinalInicial(d)
+    && pieza(q.first,d) == pieza(p.first,o));
+}
+bool esCapturaValida(posicion p, coordenada o,coordenada d){
+    return (casillaVacia(p.first,o)==false && casillaVacia(p.first,d)==false && color(p.first,o)!=color(p.first,d)&& casillaAtacada(p.first,o,d));
+}
+
+bool esMovimientoValido(posicion p, coordenada o, coordenada d){
+
+    return p.second == color(p.first,o)
+           && casillaVacia(p.first,o)==false
+           && casillaVacia(p.first,d)
+           && movimientoPiezaValido(p.first,o,d);
+}
+
+bool pertenece(vector<coordenada>c,coordenada d){
+    bool res= false;
+    for(int i=0; i<c.size(); i++){
+        if(c[i]==d){
+            res= true;
+        }
+    }
+    return res;
+}
 
 bool posicionesIgualesExceptoEn (posicion p, posicion q,vector<coordenada> C) {
+    bool res = false;
     for (int x = 0; x < DIM; x++) {
         for (int y = 0; y < DIM; y++) {
             coordenada c = setCoord(x, y);
-            if (c != C) {
-                if (pieza(p.first, c) == pieza(q.first, c) && color(p.first, c) = color(q.first, c)) {
+            if (!pertenece(C,c)) {
+                if (pieza(p.first, c) == pieza(q.first, c) && color(p.first, c) == color(q.first, c)) {
                     res = true;
                 }
                 res = true;
@@ -349,24 +381,18 @@ bool posicionesIgualesExceptoEn (posicion p, posicion q,vector<coordenada> C) {
     }
     return res;
 }
+bool posicionSiguiente (posicion p, posicion q, coordenada o, coordenada d){
+    vector<coordenada> ca;
+    ca.push_back(o);
+    ca.push_back(d);
 
-
-bool esMovimientoValido(posicion p, coordenada o, coordenada d){
-
-   return jugador(p)==color(p.first,o) && casillaVacia(p.first,o)=false && casillaVacia(p.first,d)&& movimientoPiezaValido(p.first,o,d));
+    return (posicionesIgualesExceptoEn(p, q, ca)
+    && casillaVacia(q.first,o)
+    &&(esMovimientoValido(p,o,d)))
+    ||(esCapturaValida(p,o,d)
+    &&piezaCorrectaEnDestino(p,q,o,d));
 }
 
 
-bool esCapturaValida(posicion p, coordenada o,coordenada d){
-    return (casillaVacia(p.first,o)=false && casillaVacia(p.first,d)=false && color(p.first,o)!=color(p.first,d)&& casillaAtacada(p.first,o,d))
-}
 
 
-bool piezaCorrectaEnDestino(posicion p, posicion q, coordenada o, coordenada d){
-    return( color(p.first,d)=color(q.first,d)&&(enLineaFinalInicial(d)&& pieza(q.first,d)=TORRE)|| enLineaFinal(d)=false&&pieza(q.first,d)=pieza(p.first,o))
-}
-bool enLineaFinalInicial(coordenada c){
-    return (c.first==0 || c.first==DIM-1)
-}
-
-*/
