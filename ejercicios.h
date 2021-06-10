@@ -17,6 +17,9 @@ bool hayJaqueDescubierto ( posicion const &p );
 void ejecutarSecuenciaForzada ( posicion &p, secuencia s );
 int seVieneElJaqueEn ( posicion const & p );
 void ObtenerTableroOrdenado(tablero& t);
+
 bool sonCasillasAtacadas (tablero t, jugador j, vector<coordenada> atacadas);
+int apariciones(vector<coordenada> v, coordenada c );
+bool casillaAtacada (tablero t, coordenada o, coordenada d);
 
 #endif //

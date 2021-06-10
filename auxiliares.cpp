@@ -246,6 +246,7 @@ bool movimientoAlfilValido (tablero t,coordenada o, coordenada d) {
 }
 
 bool mueveEnHorizontal (coordenada o, coordenada d) {
+    bool b = abs(o.first - d.first) == 0 || abs(o.second - d.second) == 1;
     return abs(o.first - d.first) == 0 || abs(o.second - d.second) == 1;
 }
 
@@ -253,6 +254,7 @@ bool mueveEnDiagonal (coordenada o, coordenada d) {
     return abs(o.first - d.first) == 1 && abs(o.second - d.second) == 1;
 }
 bool mueveEnVertical (coordenada o, coordenada d) {
+    bool b=abs(o.first - d.first) == 1 && abs(o.second - d.second) == 0;
     return abs(o.first - d.first) == 1 && abs(o.second - d.second) == 0;
 }
 bool movimientoReyValido (coordenada o, coordenada d){
@@ -284,14 +286,22 @@ bool movimientoTorreValido (tablero t, coordenada o, coordenada d) {
 }
 
 bool movimientoPiezaValido (tablero t, coordenada o, coordenada d){
-    return (pieza(t, o) == PEON && movimientoPeonValido(color(t, o), o, d)) ||
-            (pieza(t, o) == ALFIL && movimientoAlfilValido(t, o, d)) ||
-             (pieza(t, o) == TORRE && movimientoTorreValido(t, o, d)) ||
-              (pieza(t, o) == REY && movimientoReyValido(o, d));
+    bool res = (pieza(t, o) == PEON && movimientoPeonValido(color(t, o), o, d)) ||
+                    (pieza(t, o) == ALFIL && movimientoAlfilValido(t, o, d)) ||
+                        (pieza(t, o) == TORRE && movimientoTorreValido(t, o, d)) ||
+                            (pieza(t, o) == REY && movimientoReyValido(o, d));
+    return res;
 }
 
 bool casillaAtacada (tablero t, coordenada o, coordenada d) {
-    return !casillaVacia(t, o) && ((pieza(t, o) == PEON && movimientoPiezaValido(t, o, d)) || (pieza(t, o) == PEON && capturaPeonValida(t, o, d)));
+    bool res = false;
+
+    if(!casillaVacia(t, o) &&
+                ((pieza(t, o) != PEON && movimientoPiezaValido(t, o, d))
+                        || (pieza(t, o) == PEON && capturaPeonValida(t, o, d))))
+        res = true;
+
+   return  res;
 }
 
 bool sonCasillasAtacadas (tablero t, jugador j, vector<coordenada> atacadas) {
@@ -300,9 +310,9 @@ bool sonCasillasAtacadas (tablero t, jugador j, vector<coordenada> atacadas) {
           for(int y = 0;y < DIM;y++){
               coordenada c = setCoord(x,y);
               bool atacadaEnTablero = false;
-              for(int i =0;i < DIM;i++){
-                  for(int j=0;j < DIM;j++){
-                      coordenada o = setCoord(i,j);
+              for(int a =0;a < DIM;a++){
+                  for(int b=0;b < DIM;b++){
+                      coordenada o = setCoord(a,b);
                       if(c!=o  && color(t, o) == j && casillaAtacada(t, o,c)){
                           atacadaEnTablero = true;
                       }
