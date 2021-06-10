@@ -18,9 +18,6 @@ void ejecutarSecuenciaForzada ( posicion &p, secuencia s );
 int seVieneElJaqueEn ( posicion const & p );
 void ObtenerTableroOrdenado(tablero& t);
 
-bool sonCasillasAtacadas (tablero t, jugador j, vector<coordenada> atacadas);
-int apariciones(vector<coordenada> v, coordenada c );
-bool casillaAtacada (tablero t, coordenada o, coordenada d);
 
 //ejercicio 3
 
@@ -43,9 +40,13 @@ bool capturaPeonValida ( tablero t, coordenada o, coordenada d) ;
 bool movimientoTorreValido (tablero t, coordenada o, coordenada d);
 bool movimientoPiezaValido (tablero t, coordenada o, coordenada d);
 bool casillaAtacada (tablero t, coordenada o, coordenada d) ;
-bool sonCasillasAtacadas (tablero t, jugador j, vector<coordenada> atacadas);
+// bool sonCasillasAtacadas (tablero t, jugador j, vector<coordenada> atacadas);
+bool casillaAtacada (tablero t, coordenada o, coordenada d);
+vector<coordenada> obtenerCasillasAtacadas(tablero t,jugador j);
 
 //fin ejercicio 3
+
+
 // ejercicio 4
 bool posicionSiguienteCorrecta ( posicion const &p1, posicion const &p2, coordenada o, coordenada d );
 bool piezaCorrectaEnDestino(posicion p, posicion q, coordenada o, coordenada d);

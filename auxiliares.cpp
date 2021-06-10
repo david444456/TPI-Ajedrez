@@ -248,8 +248,8 @@ bool movimientoAlfilValido (tablero t,coordenada o, coordenada d) {
 }
 
 bool mueveEnHorizontal (coordenada o, coordenada d) {
-    bool b = abs(o.first - d.first) == 0 || abs(o.second - d.second) == 1;
-    return abs(o.first - d.first) == 0 || abs(o.second - d.second) == 1;
+    bool b = abs(o.first - d.first) == 0 && abs(o.second - d.second) == 1;
+    return abs(o.first - d.first) == 0 && abs(o.second - d.second) == 1;
 }
 
 bool mueveEnDiagonal (coordenada o, coordenada d) {
@@ -268,9 +268,21 @@ bool movimientoPeonValido (int color, coordenada o, coordenada d) {
 }
 
 bool capturaPeonValida ( tablero t, coordenada o, coordenada d) {
-    return abs(d.first - o.first) == 1 && ((color(t, o) == BLANCO && d.second == o.second - 1) || (color(t, o) == NEGRO && d.second == o.second + 1));
+    bool ambos  =abs(d.second - o.second) == 1;
+    bool blanco = (color(t, o) == BLANCO && d.first == o.first - 1);
+    bool negro  = (color(t, o) == NEGRO  && d.first == o.first + 1);
+    return ambos && (blanco || negro);
 }
 
+/*
+ * cambie el indexado arriba, porque esta asi en TPI?
+bool capturaPeonValida ( tablero t, coordenada o, coordenada d) {
+    bool ambos  =abs(d.first - o.first) == 1;
+    bool blanco = (color(t, o) == BLANCO && d.second == o.second - 1);
+    bool negro  = (color(t, o) == NEGRO  && d.second == o.second + 1);
+    return ambos && (blanco || negro);
+}
+*/
 bool movimientoTorreValido (tablero t, coordenada o, coordenada d) {
     bool res = true;
     if(d.second == o.second){
@@ -305,7 +317,7 @@ bool casillaAtacada (tablero t, coordenada o, coordenada d) {
 
    return  res;
 }
-
+/*
 bool sonCasillasAtacadas (tablero t, jugador j, vector<coordenada> atacadas) {
     bool res = true;
     for(int x = 0;x < DIM;x++){
@@ -326,7 +338,47 @@ bool sonCasillasAtacadas (tablero t, jugador j, vector<coordenada> atacadas) {
     }
     return res;
 }
+*/
+vector<coordenada> obtenerCasillasAtacadas(tablero t,jugador j){
 
+    vector <coordenada> cA;
+    for(int x = 0;x < DIM;x++){
+        for(int y = 0;y < DIM;y++){
+            coordenada c = setCoord(x,y);
+            for(int a =0;a < DIM;a++){
+                for(int b=0;b < DIM;b++){
+                    coordenada o = setCoord(a,b);
+                    if( c!=o  && color(t, o) == j && casillaAtacada(t, o,c)){
+                        cA.push_back(c);
+                    }
+                }
+            }
+        }
+    }
+    return cA;
+}
+
+/*
+vector<coordenada> obtenerCasillasAtacadas(tablero t,jugador j){
+
+    vector <coordenada> cA;
+    for(int x = 0; x<t.size(); x++){
+        for(int y = 0; y<t[x].size(); y++){
+            coordenada c = setCoord(x,y);
+            for(int a =0; a<t.size();a++){
+                for(int b =0; b<t[a].size();b++){
+                    coordenada o = setCoord(a,b);
+                    if(apariciones(cA,c)==0 && casillaAtacada(t,o,c)
+                       && t[o.first][o.second].second == j){
+                        cA.push_back(c);
+                    }
+                }
+            }
+        }
+    }
+    return cA;
+}
+*/
 
 ///////fin ejercicio 3
 

@@ -20,21 +20,7 @@ bool posicionInicial ( posicion const &p ) {
 
 // EJERCICIO 3
 vector <coordenada> casillasAtacadas ( posicion const &p, int j ) {
-    vector <coordenada> cA;
-    for(int x = 0; x<p.first.size(); x++){
-        for(int y = 0; y<p.first[x].size(); y++){
-            coordenada c = setCoord(x,y);
-            for(int a =0; a<p.first.size();a++){
-                for(int b =0; b<p.first[a].size();b++){
-                    coordenada o = setCoord(a,b);
-                    if(apariciones(cA,c)==0 && casillaAtacada(p.first,o,c)
-                        && p.first[o.first][o.second].second == j){
-                        cA.push_back(c);
-                    }
-                }
-            }
-        }
-    }
+    vector <coordenada> cA = obtenerCasillasAtacadas(p.first,j);
     return cA;
 }
 
