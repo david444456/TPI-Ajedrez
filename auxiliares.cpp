@@ -1,7 +1,7 @@
 #include "definiciones.h"
 #include "auxiliares.h"
 
-int DIM = 8;
+//int DIM = 8;
 
 using namespace std;
 // aqui se pueden ubicar todas las funciones auxiliares de soporte para la resolucion de los ejercicios
@@ -29,7 +29,13 @@ tablero inicializarTablero(){
     tablero out(ANCHO_TABLERO, fila);
     return out;
 }
-
+int contrincante(int j){
+    int res= BLANCO;
+    if(j==BLANCO){
+        res= NEGRO;
+    }
+    return res;
+}
 bool esMatriz(tablero t){
     bool res = true;
     for(int i = 0; i<t.size(); i++){
@@ -195,8 +201,6 @@ void ObtenerTableroOrdenado(tablero& t){
 
 ///////ejercicio 3
 
-#define jugador int
-#define DIM 8
 
 bool enRango (int x, int m1, int m2) {
     return ( m1 < x && x < m2 ) || ( m2 < x && x < m1 );
@@ -320,6 +324,7 @@ bool casillaAtacada (tablero t, coordenada o, coordenada d) {
 /*
 bool sonCasillasAtacadas (tablero t, jugador j, vector<coordenada> atacadas) {
     bool res = true;
+
     for(int x = 0;x < DIM;x++){
           for(int y = 0;y < DIM;y++){
               coordenada c = setCoord(x,y);
@@ -340,7 +345,6 @@ bool sonCasillasAtacadas (tablero t, jugador j, vector<coordenada> atacadas) {
 }
 */
 vector<coordenada> obtenerCasillasAtacadas(tablero t,jugador j){
-
     vector <coordenada> cA;
     for(int x = 0;x < DIM;x++){
         for(int y = 0;y < DIM;y++){
@@ -443,6 +447,137 @@ bool posicionSiguiente (posicion p, posicion q, coordenada o, coordenada d){
     &&(esMovimientoValido(p,o,d)))
     ||(esCapturaValida(p,o,d)
     &&piezaCorrectaEnDestino(p,q,o,d));
+}
+
+///ejer 6
+//pre: o a d es movimiento valido o captura valida
+posicion seConvierteEnPosicion(posicion p, coordenada o, coordenada d){
+    posicion t = p;
+    swap(t.first[o.first][o.second],t.first[d.first][d.second]);
+    return t;
+}
+
+
+bool loPoneEnjaque (posicion p, coordenada o, coordenada d){
+    bool res = false;
+    posicion q = seConvierteEnPosicion(p,o,d);
+    res= posicionSiguiente(p,q,o,d)&& p.second==q.second && jugadorEnJaque(q,q.second);
+
+    //for(int x = 0;x < DIM;x++) {
+      //  for (int y = 0; y < DIM; y++) {
+            //posicion q = seConvierteEnPosicion();
+            //if (esPosicionValida(q)){
+                //res= posicionSiguiente(p,q,o,d)&& p.second==q.second && jugadorEnJaque(q,q.second);
+           // }
+        //}
+    //}
+    return res;
+}
+
+bool esJugadaLegal (posicion p, coordenada o, coordenada d){
+    bool res= (esMovimientoValido(p,o,d) || esCapturaValida(p,o,d)) && !loPoneEnjaque(p,o,d);
+    return res;
+}
+
+
+bool existeMovimientoParaSalirDelJaque(posicion p){
+    bool res = false;
+    for(int x = 0;x < DIM;x++) {
+        for (int y = 0; y < DIM; y++) {
+            coordenada o = setCoord(x, y);
+            for(int i = 0; i<DIM;i++){
+                for(int j = 0; j<DIM;j++){
+                    coordenada d = setCoord(i, j);
+                    if(color(p.first, o) == p.second && esJugadaLegal(p, o, d)){
+                        res = true;
+                    }
+                }
+            }
+        }
+    }
+    return res;
+}
+
+bool esJaqueMate(posicion p){
+    bool res = false;
+
+    res = jugadorEnJaque(p, p.second)  ;
+
+    res = res && !existeMovimientoParaSalirDelJaque(p);
+
+    return res;
+}
+bool atacaAlRey (posicion p, coordenada o){
+    bool res=false;
+    for(int x = 0;x < DIM;x++) {
+        for (int y = 0; y < DIM; y++) {
+            coordenada d = setCoord(x,y);
+            if(pieza(p.first,d)==REY && color(p.first,d)==p.second && esCapturaValida(p,o,d)){
+                res=true;
+            }
+        }
+    }
+    return res;
+}
+
+
+
+bool jugadorEnJaque (posicion p, jugador j) {
+    bool res = false;
+    posicion q = p;
+    q.second = j;
+    for(int i = 0; i<p.first.size();i++){
+        for(int j =0; j <p.first[i].size();j++){
+            coordenada o = setCoord(i,j);
+            if( (color(q.first,o)== contrincante(j)) && atacaAlRey(q,o)){
+                res = true;
+            }
+        }
+    }
+    return res;
+}
+
+
+
+bool noHayMovimientosLegales (posicion p){
+    bool res = true;
+    vector <coordenada> movibles;
+    for (int i=0; i<p.first.size(); i++){
+        for (int j=0; j<p.first[i].size(); j++){
+            coordenada o = make_pair(i,j);
+            if(p.first[i][j].first != 0){
+                for(int a =0; a<p.first.size();a++){
+                    for(int b =0; b<p.first[a].size();b++){
+
+                        coordenada d = make_pair(a,b);
+                        if(esMovimientoValido(p, o, d) || esCapturaValida(p, o, d)){
+                            res = false;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return res;
+}
+
+bool soloHayReyes (tablero t){
+    bool res=true;
+    for(int x = 0;x < DIM;x++){
+        for(int y = 0;y < DIM;y++){
+            coordenada c = setCoord(x,y);
+                if (!(casillaVacia(t,c) || pieza(t,c) == REY)){
+                    res = false;
+                }
+        }
+    }
+    return res;
+}
+
+
+bool esEmpate (posicion p){
+    bool res = soloHayReyes(p.first) || (!jugadorEnJaque(p,p.second) && noHayMovimientosLegales(p));
+    return res;
 }
 
 

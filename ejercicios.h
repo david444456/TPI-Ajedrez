@@ -16,6 +16,8 @@ bool finDeLaPartida ( posicion const &p, int &j );
 bool hayJaqueDescubierto ( posicion const &p );
 void ejecutarSecuenciaForzada ( posicion &p, secuencia s );
 int seVieneElJaqueEn ( posicion const & p );
+
+
 void ObtenerTableroOrdenado(tablero& t);
 
 
@@ -55,4 +57,6 @@ bool esMovimientoValido(posicion p, coordenada o, coordenada d);
 bool pertenece(vector<coordenada>c,coordenada d);
 bool posicionesIgualesExceptoEn (posicion p, posicion q,vector<coordenada> C);
 bool posicionSiguiente (posicion p, posicion q, coordenada o, coordenada d);
+//ejercicio 6
+
 #endif //

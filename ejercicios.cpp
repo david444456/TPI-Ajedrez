@@ -42,7 +42,14 @@ void ordenarTablero ( posicion &p ) {
 // EJERCICIO 6
 bool finDeLaPartida ( posicion const &p, int &j ) {
     bool resp = false;
-    // completar codigo
+    if(esEmpate(p)){
+        j = 0;
+        resp = true;
+    }else if(esJaqueMate(p)){
+        j = contrincante(p.second);
+        resp = true;
+    }
+    //resp = (((j == 0) == esEmpate(p)) || j == contrincante(p.second) ) == esJaqueMate(p);
     return resp;
 }
 
