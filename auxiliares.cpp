@@ -466,16 +466,8 @@ posicion seConvierteEnPosicion(posicion p, coordenada o, coordenada d){
 bool loPoneEnjaque (posicion p, coordenada o, coordenada d){
     bool res = false;
     posicion q = seConvierteEnPosicion(p,o,d);
-    res= posicionSiguiente(p,q,o,d)&& p.second==q.second && jugadorEnJaque(q,q.second);
+    res = posicionSiguiente(p,q,o,d) && jugadorEnJaque(q,q.second); //&& p.second==q.second
 
-    //for(int x = 0;x < DIM;x++) {
-      //  for (int y = 0; y < DIM; y++) {
-            //posicion q = seConvierteEnPosicion();
-            //if (esPosicionValida(q)){
-                //res= posicionSiguiente(p,q,o,d)&& p.second==q.second && jugadorEnJaque(q,q.second);
-           // }
-        //}
-    //}
     return res;
 }
 
@@ -666,12 +658,12 @@ posicion SecuenciaForzada(posicion p, secuencia s){
     seq[0] = p;
     for(int i = 1; i<seq.size(); i++){
         if(i % 2 == 1 ) { //es movimiento sin limites
-            seq[i] = PosicionResultanteUnaJugada(p, s, i - 1);
+            seq[i] = PosicionResultanteUnaJugada(seq[i-1], s, (i)/2);
         }else { //forzado
             vector <coordenada> movibles = ObtenerUnicasCoordenadasForzada(seq[i-1]);
             secuencia sAux(1);
             sAux[0] = make_pair(movibles[0], movibles[1]);
-            seq[i] = PosicionResultanteUnaJugada(p, s, 0);
+            seq[i] = PosicionResultanteUnaJugada(seq[i-1], s, 0);
         }
     }
     return seq[seq.size() -1];
