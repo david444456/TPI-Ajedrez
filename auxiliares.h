@@ -30,6 +30,12 @@ bool soloHayReyes (tablero t);
 bool existeMovimientoParaSalirDelJaque(posicion p);
 bool noHayMovimientosLegales (posicion p);
 
+//7
+//ejercicio 7
 
+bool alMoverQuedaEnJaque(posicion p);
+
+//8
+posicion SecuenciaForzada(posicion p, secuencia s);
 
 #endif //AJEDREZLITE_AUXILIARES_H

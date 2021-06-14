@@ -56,13 +56,16 @@ bool finDeLaPartida ( posicion const &p, int &j ) {
 // EJERCICIO 7
 bool hayJaqueDescubierto ( posicion const &p ) {
     bool resp = false;
-    // completar codigo
+
+    resp = alMoverQuedaEnJaque(p);
+
     return resp;
 }
 
 // EJERCICIO 8
 void ejecutarSecuenciaForzada ( posicion &p, secuencia s ) {
     // completar codigo
+    p = SecuenciaForzada(p, s);
     return;
 }
 

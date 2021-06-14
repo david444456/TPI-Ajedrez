@@ -288,13 +288,14 @@ bool capturaPeonValida ( tablero t, coordenada o, coordenada d) {
 }
 */
 bool movimientoTorreValido (tablero t, coordenada o, coordenada d) {
+
     bool res = true;
-    if(d.second == o.second){
-        for(int x=0;enRango(x, o.first, d.first);x++){
+    if(d.second == o.second){ //vertical
+        for(int x= min(o.first, d.first)+1;x<max(o.first, d.first);x++){
             res = res && casillaVacia(t, setCoord(x, o.second));
         }
-    }else if(d.first == o.first){
-        for(int y=0;enRango(y, o.second, d.second);y++){
+    }else if(d.first == o.first){ //horizontal
+        for(int y = min(o.second, d.second)+1;y<max(o.second, d.second);y++){
             res = res && casillaVacia(t, setCoord(o.first, y));
         }
     }else{
@@ -401,7 +402,11 @@ bool piezaCorrectaEnDestino(posicion p, posicion q, coordenada o, coordenada d){
     && pieza(q.first,d) == pieza(p.first,o));
 }
 bool esCapturaValida(posicion p, coordenada o,coordenada d){
-    return (casillaVacia(p.first,o)==false && casillaVacia(p.first,d)==false && color(p.first,o)!=color(p.first,d)&& casillaAtacada(p.first,o,d));
+
+    return (casillaVacia(p.first,o)==false
+    && casillaVacia(p.first,d)==false
+    && color(p.first,o)!=color(p.first,d)
+    && casillaAtacada(p.first,o,d));
 }
 
 bool esMovimientoValido(posicion p, coordenada o, coordenada d){
@@ -512,7 +517,10 @@ bool atacaAlRey (posicion p, coordenada o){
     for(int x = 0;x < DIM;x++) {
         for (int y = 0; y < DIM; y++) {
             coordenada d = setCoord(x,y);
-            if(pieza(p.first,d)==REY && color(p.first,d)==p.second && esCapturaValida(p,o,d)){
+            bool a =pieza(p.first,d)==REY;
+            bool b =color(p.first,d)==p.second;
+            bool c = esCapturaValida(p,o,d);
+            if(a && b && c){
                 res=true;
             }
         }
@@ -541,7 +549,7 @@ bool jugadorEnJaque (posicion p, jugador j) {
 
 bool noHayMovimientosLegales (posicion p){
     bool res = true;
-    vector <coordenada> movibles;
+
     for (int i=0; i<p.first.size(); i++){
         for (int j=0; j<p.first[i].size(); j++){
             coordenada o = make_pair(i,j);
@@ -581,5 +589,98 @@ bool esEmpate (posicion p){
 }
 
 
+/////////ejercicio 7
+/*
+proc hayJaqueDescubierto (in p: posicion, out res: Bool) {
+    Pre {esP osicionV alida(p) ∧ ¬jugadorEnJaque(p, contrincante(jugador(p)))}
+    Post {res = true ↔ alMoverQuedaEnJaque(p)}
 
 
+    pred alMoverQuedaEnJaque (p: posicion) {
+        (∃o : coordenada)(∃d : coordenada)((coordenadaEnRango(o) ∧ coordenadaEnRango(d)) ∧L
+            color(p0, o) = jugador(p) ∧ ((esMovimientoValido(p, o, d) ∨ esCapturaValida(p, o, d)) ∧
+            ((∃q : posicion)(esPosicionValida(q) ∧L (posicionSiguiente(p, q, o, d) ∧ jugadorEnJaque(q, q1)))
+        }
+    }
+*/
+
+bool alMoverQuedaEnJaque(posicion p){
+    bool res = false;
+
+    for(int i = 0; i<DIM;i++){
+        for(int j = 0; j < DIM; j++){
+            coordenada o = make_pair(i,j);
+            for(int x = 0; x < DIM; x++){
+                for(int y = 0; y<DIM; y++){
+                    coordenada d = setCoord(x,y);
+                    posicion q = seConvierteEnPosicion(p, o, d);
+                    q.second= contrincante(p.second);
+
+                    if(posicionSiguiente(p, q, o, d) && jugadorEnJaque(q, q.second)){
+                        res= true;
+                    }
+                }
+            }
+        }
+    }
+
+    return res;
+}
+
+
+/*
+color(p0, o) = jugador(p) ∧ ((esMovimientoValido(p, o, d) ∨ esCapturaValida(p, o, d)) ∧
+((∃q : posicion)(esPosicionValida(q) ∧L (posicionSiguiente(p, q, o, d) ∧ jugadorEnJaque(q, q1)))
+
+*/
+
+//ejerci 8
+
+posicion PosicionResultanteUnaJugada(posicion p, secuencia s, int index){
+    posicion res = seConvierteEnPosicion(p,s[index].first,s[index].second);
+    res.second = contrincante(p.second);
+    return res;
+}
+
+vector <coordenada> ObtenerUnicasCoordenadasForzada(posicion p){
+    vector <coordenada> movibles;
+    for(int i = 0; i<DIM;i++){
+        for(int j = 0; j < DIM; j++) {
+            coordenada o = make_pair(i, j);
+            for (int x = 0; x < DIM; x++) {
+                for (int y = 0; y < DIM; y++) {
+                    coordenada d = setCoord(x,y);
+                    if(esJugadaLegal(p, o, d)){
+                        movibles.push_back(o);
+                        movibles.push_back(d);
+                    }
+                }
+            }
+        }
+    }
+    return movibles;
+}
+
+posicion SecuenciaForzada(posicion p, secuencia s){
+    vector<posicion> seq((s.size()*2)+1);
+    seq[0] = p;
+    for(int i = 1; i<seq.size(); i++){
+        if(i % 2 == 1 ) { //es movimiento sin limites
+            seq[i] = PosicionResultanteUnaJugada(p, s, i - 1);
+        }else { //forzado
+            vector <coordenada> movibles = ObtenerUnicasCoordenadasForzada(seq[i-1]);
+            secuencia sAux(1);
+            sAux[0] = make_pair(movibles[0], movibles[1]);
+            seq[i] = PosicionResultanteUnaJugada(p, s, 0);
+        }
+    }
+    return seq[seq.size() -1];
+}
+
+
+/*
+pred esUnicaMovidaPosibleDeJugador (p: posicion, o: coordenada, d: coordenada) {
+(∀o1 : coordenada)(∀d1 : coordenada)(coordenadaEnRango(o1) ∧ coordenadaEnRango(d1) ∧L
+esJugadaLegal(p, o1, d1) −→ o = o1 ∧ d = d1)
+}
+ */
