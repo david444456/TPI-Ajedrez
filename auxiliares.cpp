@@ -458,7 +458,8 @@ bool posicionSiguiente (posicion p, posicion q, coordenada o, coordenada d){
 //pre: o a d es movimiento valido o captura valida
 posicion seConvierteEnPosicion(posicion p, coordenada o, coordenada d){
     posicion t = p;
-    swap(t.first[o.first][o.second],t.first[d.first][d.second]);
+    t.first[d.first][d.second] = p.first[o.first][o.second];
+    t.first[o.first][o.second] = make_pair(VACIO,VACIO);
     return t;
 }
 
