@@ -17,6 +17,8 @@ tablero inicializarTablero();
 coordenada setCoord(int i, int j);
 tablero tableroActual ( posicion const &p );
 
+bool esJugadaLegal(posicion p, coordenada o, coordenada d);
+
 //3
 bool esCapturaValida(posicion p, coordenada o, coordenada d);
 int contrincante(int j);

@@ -40,3 +40,23 @@ TEST(finDeLaPartidaTEST, jaqueMate){
     EXPECT_TRUE(finDeLaPartida(p,j));
     EXPECT_EQ(j, BLANCO);
 }
+
+////////////////test nuestros para funcion esJugadaLegal
+
+TEST(finDeLaPartidaTEST, problemaDel8){
+    tablero t = {	// Figura 4a del enunciado del TPE
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cPEON_B, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cREY_N},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cPEON_B},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cTORRE_B, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cREY_B, cVACIA, cVACIA, cVACIA, cTORRE_B},
+    };
+    posicion p = make_pair(t,NEGRO);
+    int j;
+
+    EXPECT_FALSE(esJugadaLegal(p,setCoord(3, 7), setCoord(4, 7)));
+    //EXPECT_EQ(j, BLANCO);
+}

@@ -65,7 +65,7 @@ bool hayJaqueDescubierto ( posicion const &p ) {
 // EJERCICIO 8
 void ejecutarSecuenciaForzada ( posicion &p, secuencia s ) {
     // completar codigo
-    p = SecuenciaForzada(p, s);
+   // p = SecuenciaForzada(p, s);
     return;
 }
 

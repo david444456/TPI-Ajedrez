@@ -457,6 +457,8 @@ bool posicionSiguiente (posicion p, posicion q, coordenada o, coordenada d){
 ///ejer 6
 //pre: o a d es movimiento valido o captura valida
 posicion seConvierteEnPosicion(posicion p, coordenada o, coordenada d){
+//    swap(p.first[o.first][o.second],p.first[d.first][d.second]);
+//    posicion t = p;
     posicion t = p;
     t.first[d.first][d.second] = p.first[o.first][o.second];
     t.first[o.first][o.second] = make_pair(VACIO,VACIO);
@@ -467,7 +469,8 @@ posicion seConvierteEnPosicion(posicion p, coordenada o, coordenada d){
 bool loPoneEnjaque (posicion p, coordenada o, coordenada d){
     bool res = false;
     posicion q = seConvierteEnPosicion(p,o,d);
-    res = posicionSiguiente(p,q,o,d) && jugadorEnJaque(q,q.second); //&& p.second==q.second
+    //q.second = contrincante(p.second);
+    res = posicionSiguiente(p,q,o,d) && jugadorEnJaque(q,p.second); //&& p.second==q.second
 
     return res;
 }
@@ -499,7 +502,7 @@ bool existeMovimientoParaSalirDelJaque(posicion p){
 bool esJaqueMate(posicion p){
     bool res = false;
 
-    res = jugadorEnJaque(p, p.second)  ;
+    res = jugadorEnJaque(p, p.second);
 
     res = res && !existeMovimientoParaSalirDelJaque(p);
 
@@ -628,7 +631,7 @@ color(p0, o) = jugador(p) ∧ ((esMovimientoValido(p, o, d) ∨ esCapturaValida(
 */
 
 //ejerci 8
-
+/*
 posicion PosicionResultanteUnaJugada(posicion p, secuencia s, int index){
     posicion res = seConvierteEnPosicion(p,s[index].first,s[index].second);
     res.second = contrincante(p.second);
@@ -661,6 +664,9 @@ posicion SecuenciaForzada(posicion p, secuencia s){
         if(i % 2 == 1 ) { //es movimiento sin limites
             seq[i] = PosicionResultanteUnaJugada(seq[i-1], s, (i)/2);
         }else { //forzado
+            if(i == 2 ){
+                int m = 1;
+            }
             vector <coordenada> movibles = ObtenerUnicasCoordenadasForzada(seq[i-1]);
             secuencia sAux(1);
             sAux[0] = make_pair(movibles[0], movibles[1]);
@@ -668,7 +674,7 @@ posicion SecuenciaForzada(posicion p, secuencia s){
         }
     }
     return seq[seq.size() -1];
-}
+}*/
 
 
 /*
