@@ -159,7 +159,8 @@ bool piezasEnCoordenadas(tablero t){
 }
 
 //ejer 5
-
+//se considero que en caso de haber mas de dos piezas del mismo tipo y dintisto color, ibamos a colocar primero
+//las blancas y despues las negras, considerandos siempre primero el orden de valor de la pieza.
 void ObtenerTableroOrdenado(tablero& t){
     //preparo
     vector<int> auxCount(DIM-1, 0);
@@ -182,8 +183,9 @@ void ObtenerTableroOrdenado(tablero& t){
         }
         //set
         int aparPieza = 0;
-        int aparColor = 1;
+
         for(int j = 0; j < t[i].size(); j++){
+            int aparColor = 1;
             if(t[i][j].first != 0){
                 while(auxCount[aparPieza] <= 0 && aparPieza < DIM){
                     aparPieza++;
