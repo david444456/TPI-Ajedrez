@@ -691,8 +691,8 @@ color(p0, o) = jugador(p) ∧ ((esMovimientoValido(p, o, d) ∨ esCapturaValida(
 
 //ejerci 8
 
-posicion PosicionResultanteUnaJugada(posicion p, secuencia s, int index){
-    posicion res = seConvierteEnPosicion(p,s[index].first,s[index].second);
+posicion PosicionResultanteUnaJugada(posicion p, coordenada o, coordenada d){
+    posicion res = seConvierteEnPosicion(p,o,d);
     res.second = contrincante(p.second);
     return res;
 }
@@ -705,7 +705,7 @@ vector <coordenada> ObtenerUnicasCoordenadasForzada(posicion p){
             for (int x = 0; x < DIM; x++) {
                 for (int y = 0; y < DIM; y++) {
                     coordenada d = setCoord(x,y);
-                    if(esJugadaLegal(p, o, d)){
+                    if(color(p.first, o) == p.second && esJugadaLegal(p, o, d)){
                         movibles.push_back(o);
                         movibles.push_back(d);
                     }
@@ -721,15 +721,11 @@ posicion SecuenciaForzada(posicion p, secuencia s){
     seq[0] = p;
     for(int i = 1; i<seq.size(); i++){
         if(i % 2 == 1 ) { //es movimiento sin limites
-            seq[i] = PosicionResultanteUnaJugada(seq[i-1], s, (i)/2);
+            seq[i] = PosicionResultanteUnaJugada(seq[i-1], s[(i)/2].first, s[(i)/2].second );
         }else { //forzado
-            if(i == 2 ){
-                int m = 1;
-            }
             vector <coordenada> movibles = ObtenerUnicasCoordenadasForzada(seq[i-1]);
-            secuencia sAux(1);
-            sAux[0] = make_pair(movibles[0], movibles[1]);
-            seq[i] = PosicionResultanteUnaJugada(seq[i-1], sAux, 0);
+
+            seq[i] = PosicionResultanteUnaJugada(seq[i-1], movibles[0], movibles[1]);
         }
     }
     return seq[seq.size() -1];

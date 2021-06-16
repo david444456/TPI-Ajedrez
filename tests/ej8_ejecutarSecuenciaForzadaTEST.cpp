@@ -67,7 +67,7 @@ TEST(ejecutarSecuenciaForzadaTEST, secuenciaForzadaTerminaEmpate) {
             {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA , cVACIA, cVACIA, cVACIA},
             {cVACIA,cVACIA , cVACIA, cREY_B, cVACIA, cVACIA, cVACIA, cVACIA},
     };//ahogado
-    posicion p_fin = make_pair(t_fin, NEGRO);
+    posicion p_fin = make_pair(t_fin, BLANCO);
 
     ejecutarSecuenciaForzada(p, s);
     EXPECT_EQ(p_fin, p);
