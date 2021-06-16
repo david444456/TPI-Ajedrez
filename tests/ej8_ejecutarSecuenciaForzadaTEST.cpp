@@ -38,3 +38,37 @@ TEST(ejecutarSecuenciaForzadaTEST, secuenciaForzada) {
     ejecutarSecuenciaForzada(p, s);
     EXPECT_EQ(p_fin, p);
 }
+
+
+TEST(ejecutarSecuenciaForzadaTEST, secuenciaForzadaTerminaEmpate) {
+    tablero t = {
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cTORRE_B},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cREY_N, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cALFIL_B, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cPEON_B, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cALFIL_B, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA , cVACIA, cVACIA, cVACIA},
+            {cVACIA,cVACIA , cVACIA, cREY_B, cVACIA, cVACIA, cTORRE_B, cVACIA},
+    };
+    posicion p = make_pair(t, BLANCO);
+    secuencia s = {
+            make_pair(make_pair(5,1),make_pair(3,3)),
+            make_pair(make_pair(7,6),make_pair(1,6)),
+    };
+
+    tablero t_fin = {
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cTORRE_B},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cTORRE_B, cVACIA},
+            {cREY_N, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cALFIL_B, cVACIA, cVACIA, cALFIL_B, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cPEON_B, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA , cVACIA, cVACIA, cVACIA},
+            {cVACIA,cVACIA , cVACIA, cREY_B, cVACIA, cVACIA, cVACIA, cVACIA},
+    };//ahogado
+    posicion p_fin = make_pair(t_fin, NEGRO);
+
+    ejecutarSecuenciaForzada(p, s);
+    EXPECT_EQ(p_fin, p);
+}

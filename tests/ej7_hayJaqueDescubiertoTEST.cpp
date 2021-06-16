@@ -70,3 +70,18 @@ TEST(hayJaqueDescubiertoTEST, jaqueDescubiertoMovimientoPeon) {
 
     EXPECT_TRUE(hayJaqueDescubierto(p));
 }
+TEST(hayJaqueDescubiertoTEST, jaqueDescubiertocomepeonnegro) {
+    tablero t = {
+            {cVACIA, cVACIA, cVACIA, cREY_N, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cPEON_N},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cPEON_N, cVACIA, cVACIA, cPEON_B},
+            {cVACIA, cVACIA, cVACIA, cPEON_B, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cTORRE_B, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cREY_B, cVACIA, cVACIA, cVACIA, cVACIA},
+    };
+    posicion p = make_pair(t, BLANCO);
+
+    EXPECT_TRUE(hayJaqueDescubierto(p));
+}

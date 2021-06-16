@@ -41,6 +41,7 @@ TEST(finDeLaPartidaTEST, jaqueMate){
     EXPECT_EQ(j, BLANCO);
 }
 
+/*
 ////////////////test nuestros para funcion esJugadaLegal
 
 TEST(finDeLaPartidaTEST, problemaDel8){
@@ -59,4 +60,95 @@ TEST(finDeLaPartidaTEST, problemaDel8){
 
     EXPECT_FALSE(esJugadaLegal(p,setCoord(3, 7), setCoord(4, 7)));
     //EXPECT_EQ(j, BLANCO);
+}
+
+
+ */
+
+TEST(finDeLaPartidaTEST, relacionadoAl8){
+    tablero t = {	// Figura 4a del enunciado del TPE
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cPEON_B, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cREY_N},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cPEON_B},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cTORRE_B, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cREY_B, cVACIA, cVACIA, cVACIA, cTORRE_B},
+    };
+    posicion p = make_pair(t,NEGRO);
+    int j;
+
+    EXPECT_FALSE(finDeLaPartida(p,j));
+}
+
+TEST(finDeLaPartidaTEST, ganaNegro) {
+    tablero t = {    // Figura 4a del enunciado del TPE
+            {cREY_B, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cTORRE_N, cTORRE_N, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cREY_N},
+    };
+    posicion p = make_pair(t, BLANCO);
+    int j;
+
+    EXPECT_TRUE(finDeLaPartida(p, j));
+    //EXPECT_EQ(j,1);
+}
+
+TEST(finDeLaPartidaTEST, empateAhogado) {
+    tablero t = {    // Figura 4a del enunciado del TPE
+            {cREY_B, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cTORRE_N},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cTORRE_N, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cREY_N},
+    };
+    posicion p = make_pair(t, BLANCO);
+    int j;
+
+    EXPECT_TRUE(finDeLaPartida(p, j));
+    EXPECT_EQ(j,0);
+}
+
+TEST(finDeLaPartidaTEST, empateTabla) {
+    tablero t = {    // Figura 4a del enunciado del TPE
+            {cREY_B, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cREY_N},
+    };
+    posicion p = make_pair(t, NEGRO);
+    int j;
+
+    EXPECT_TRUE(finDeLaPartida(p, j));
+    EXPECT_EQ(j,0);
+}
+
+TEST(finDeLaPartidaTEST, desahogaNegro) {
+    tablero t = {    // Figura 4a del enunciado del TPE
+            {cREY_B, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cTORRE_B},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cTORRE_B, cVACIA, cVACIA,  cVACIA, cVACIA, cVACIA, cVACIA, cREY_N},
+    };
+    posicion p = make_pair(t, NEGRO);
+    int j;
+
+    EXPECT_FALSE(finDeLaPartida(p, j));
 }

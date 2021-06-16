@@ -244,8 +244,12 @@ bool movimientoAlfilValido (tablero t,coordenada o, coordenada d) {
     bool res = true;
     for(int x =min(o.first,d.first) + 1; x<max(o.first,d.first); x++){
         for(int y =min(o.second,d.second) + 1; y < max(o.second,d.second); y++){
-            if(abs(x) == abs(y)){
-                coordenada m = setCoord( x,  y);
+            coordenada m = setCoord( x,  y);
+            if(m==make_pair(6,4)){
+                int hola = 1;
+            }
+            if(abs(m.first - o.first) == abs(m.second - o.second)){
+
                 res = res && casillaVacia(t,m);
             }
         }
@@ -407,12 +411,35 @@ bool enLineaFinalInicial(coordenada c){
 }
 
 bool piezaCorrectaEnDestino(posicion p, posicion q, coordenada o, coordenada d){
+
+    bool da = color(p.first,d)==color(q.first,d);
+    bool db = enLineaFinalInicial(d);
+    bool dc = pieza(q.first,d)==TORRE;
+    bool de = !enLineaFinalInicial(d);
+    bool df = pieza(q.first,d) == pieza(p.first,o);
+
+    return ( da && (db && dc) || (de && df));
+}
+
+/*
+bool piezaCorrectaEnDestino(posicion p, posicion q, coordenada o, coordenada d){
+
+    bool da =;
+    bool db =;
+    bool dc =;
+    bool de =;
+
+
+
     return (color(p.first,d)==color(q.first,d)
     && (enLineaFinalInicial(d)
     && pieza(q.first,d)==TORRE)
     || enLineaFinalInicial(d)
     && pieza(q.first,d) == pieza(p.first,o));
 }
+
+
+ */
 bool esCapturaValida(posicion p, coordenada o,coordenada d){
 
     return (casillaVacia(p.first,o)==false
@@ -459,11 +486,14 @@ bool posicionSiguiente (posicion p, posicion q, coordenada o, coordenada d){
     ca.push_back(o);
     ca.push_back(d);
 
-    return (posicionesIgualesExceptoEn(p, q, ca)
-    && casillaVacia(q.first,o)
-    &&(esMovimientoValido(p,o,d)))
-    ||(esCapturaValida(p,o,d)
-    &&piezaCorrectaEnDestino(p,q,o,d));
+    bool da= posicionesIgualesExceptoEn(p, q, ca);
+    bool db= casillaVacia(q.first,o);
+    bool dc= esMovimientoValido(p,o,d);
+
+    bool dd= esCapturaValida(p,o,d);
+    bool de= piezaCorrectaEnDestino(p,q,o,d);
+
+    return (da && db && dc ) ||(dd && de);
 }
 
 ///ejer 6
@@ -472,7 +502,15 @@ posicion seConvierteEnPosicion(posicion p, coordenada o, coordenada d){
 //    swap(p.first[o.first][o.second],p.first[d.first][d.second]);
 //    posicion t = p;
     posicion t = p;
-    t.first[d.first][d.second] = p.first[o.first][o.second];
+
+    if(t.first[o.first][o.second] == cPEON_B && o.first == 1 && d.first == 0){
+        t.first[d.first][d.second] = make_pair(3,1);
+    }else if(t.first[o.first][o.second] == cPEON_N && o.first == 6 && d.first == 7){
+        t.first[d.first][d.second] = make_pair(3,2);
+    }else{
+        t.first[d.first][d.second] = p.first[o.first][o.second];
+    }
+
     t.first[o.first][o.second] = make_pair(VACIO,VACIO);
     return t;
 }
@@ -538,14 +576,17 @@ bool atacaAlRey (posicion p, coordenada o){
 
 
 
-bool jugadorEnJaque (posicion p, jugador j) {
+bool jugadorEnJaque (posicion p, jugador jug) {
     bool res = false;
     posicion q = p;
-    q.second = j;
+    q.second = jug;
     for(int i = 0; i<p.first.size();i++){
         for(int j =0; j <p.first[i].size();j++){
             coordenada o = setCoord(i,j);
-            if( (color(q.first,o)== contrincante(j)) && atacaAlRey(q,o)){
+            bool da = (color(q.first,o)== contrincante(jug));
+            bool db = atacaAlRey(q,o);
+
+            if( da && db){
                 res = true;
             }
         }
@@ -564,9 +605,8 @@ bool noHayMovimientosLegales (posicion p){
             if(p.first[i][j].first != 0){
                 for(int a =0; a<p.first.size();a++){
                     for(int b =0; b<p.first[a].size();b++){
-
                         coordenada d = make_pair(a,b);
-                        if(esMovimientoValido(p, o, d) || esCapturaValida(p, o, d)){
+                        if( esJugadaLegal(p, o, d)){
                             res = false;
                         }
                     }
@@ -592,7 +632,13 @@ bool soloHayReyes (tablero t){
 
 
 bool esEmpate (posicion p){
-    bool res = soloHayReyes(p.first) || (!jugadorEnJaque(p,p.second) && noHayMovimientosLegales(p));
+    bool a = soloHayReyes(p.first);
+    bool c = !jugadorEnJaque(p,p.second);
+    bool d = noHayMovimientosLegales(p);
+
+    bool b = (c && d);
+
+    bool res =  a || (b);
     return res;
 }
 
@@ -621,6 +667,7 @@ bool alMoverQuedaEnJaque(posicion p){
             for(int x = 0; x < DIM; x++){
                 for(int y = 0; y<DIM; y++){
                     coordenada d = setCoord(x,y);
+
                     posicion q = seConvierteEnPosicion(p, o, d);
                     q.second= contrincante(p.second);
 
@@ -643,7 +690,7 @@ color(p0, o) = jugador(p) ∧ ((esMovimientoValido(p, o, d) ∨ esCapturaValida(
 */
 
 //ejerci 8
-/*
+
 posicion PosicionResultanteUnaJugada(posicion p, secuencia s, int index){
     posicion res = seConvierteEnPosicion(p,s[index].first,s[index].second);
     res.second = contrincante(p.second);
@@ -682,11 +729,11 @@ posicion SecuenciaForzada(posicion p, secuencia s){
             vector <coordenada> movibles = ObtenerUnicasCoordenadasForzada(seq[i-1]);
             secuencia sAux(1);
             sAux[0] = make_pair(movibles[0], movibles[1]);
-            seq[i] = PosicionResultanteUnaJugada(seq[i-1], s, 0);
+            seq[i] = PosicionResultanteUnaJugada(seq[i-1], sAux, 0);
         }
     }
     return seq[seq.size() -1];
-}*/
+}
 
 
 /*
