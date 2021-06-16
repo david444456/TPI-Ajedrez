@@ -54,3 +54,56 @@ TEST(casillasAtacadasTEST, atacadasDelContrincante) {
 	vector<coordenada> atacadas = casillasAtacadas(p, j);
 	EXPECT_EQ(ordenarVectorPares(esperado), ordenarVectorPares(atacadas));
 }
+
+//////////////ests nuestros
+
+TEST(casillasAtacadasTEST, peonesEnScrumDelQueJuega) {
+    tablero t = {
+            {cPEON_B, cPEON_B, cPEON_B, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cPEON_B, cPEON_B, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cPEON_B, cPEON_B, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cREY_B, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cREY_N, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+    };
+    posicion p = make_pair(t, BLANCO);
+
+    int j = BLANCO;
+
+    vector<coordenada> esperado = {
+            make_pair(0, 0), make_pair(0, 1), make_pair(0, 2), make_pair(1, 0), make_pair(1, 1), make_pair(1, 2), make_pair(5, 3), make_pair(5, 4), make_pair(5, 5), make_pair(6, 3), make_pair(6, 5), make_pair(7, 3), make_pair(7, 4), make_pair(7, 5)
+    };
+
+    vector<coordenada> atacadas = casillasAtacadas(p, j);
+    EXPECT_EQ(ordenarVectorPares(esperado), ordenarVectorPares(atacadas));
+}
+
+
+TEST(casillasAtacadasTEST, TaponesPeonNyAlfilA) {
+    tablero t = {
+            {cVACIA, cVACIA  , cVACIA, cREY_N  , cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA  , cVACIA, cVACIA  , cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA  , cVACIA, cVACIA  , cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA  , cVACIA, cPEON_N , cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA  , cVACIA, cVACIA  , cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cALFIL_B, cVACIA, cTORRE_B, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA  , cVACIA, cVACIA  , cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA  , cVACIA, cREY_B  , cVACIA, cVACIA, cVACIA, cVACIA},
+    };
+    posicion p = make_pair(t, NEGRO);
+
+    int j = BLANCO;
+
+    vector<coordenada> esperado = {
+            make_pair(3, 3),
+            make_pair(4, 0), make_pair(4, 2), make_pair(4, 3) ,
+            make_pair(5, 1), make_pair(5, 2), make_pair(5, 4), make_pair(5, 5), make_pair(5, 6), make_pair(5, 7),
+            make_pair(6, 0), make_pair(6, 2), make_pair(6, 3),make_pair(6, 4),
+            make_pair(7, 2),make_pair(7, 3),make_pair(7, 4)
+    };
+
+    vector<coordenada> atacadas = casillasAtacadas(p, j);
+    EXPECT_EQ(ordenarVectorPares(esperado), ordenarVectorPares(atacadas));
+}

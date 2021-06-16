@@ -240,10 +240,11 @@ int pieza (tablero t, coordenada c){
 
 bool movimientoAlfilValido (tablero t,coordenada o, coordenada d) {
     bool res = true;
-    for(int x =0; enRango(x, 0, d.first - o.first); x++){
-        for(int y = 0; enRango(y, 0, d.second - o.second); y++){
+    for(int x =min(o.first,d.first) + 1; x<max(o.first,d.first); x++){
+        for(int y =min(o.second,d.second) + 1; y < max(o.second,d.second); y++){
             if(abs(x) == abs(y)){
-                res = res && casillaVacia(t, setCoord(o.first + x, o.second + y));
+                coordenada m = setCoord( x,  y);
+                res = res && casillaVacia(t,m);
             }
         }
     }
@@ -315,9 +316,11 @@ bool movimientoPiezaValido (tablero t, coordenada o, coordenada d){
 bool casillaAtacada (tablero t, coordenada o, coordenada d) {
     bool res = false;
 
-    if(!casillaVacia(t, o) &&
-                ((pieza(t, o) != PEON && movimientoPiezaValido(t, o, d))
-                        || (pieza(t, o) == PEON && capturaPeonValida(t, o, d))))
+    bool a = !casillaVacia(t, o);
+    bool b =(pieza(t, o) != PEON  && movimientoPiezaValido(t, o, d));
+    bool c= (pieza(t, o) == PEON  && capturaPeonValida(t, o, d));
+
+    if( a && ( b || c ))
         res = true;
 
    return  res;
@@ -353,7 +356,14 @@ vector<coordenada> obtenerCasillasAtacadas(tablero t,jugador j){
             for(int a =0;a < DIM;a++){
                 for(int b=0;b < DIM;b++){
                     coordenada o = setCoord(a,b);
-                    if( c!=o  && color(t, o) == j && casillaAtacada(t, o,c)){
+
+                    bool pa = (c!=o);
+                    bool pb = color(t, o) == j;
+                    bool pc = casillaAtacada(t, o,c);
+                    bool pd = apariciones(cA,c) == 0;
+
+
+                    if( pa  && pb && pc && pd){
                         cA.push_back(c);
                     }
                 }
