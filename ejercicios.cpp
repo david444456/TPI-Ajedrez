@@ -72,6 +72,6 @@ void ejecutarSecuenciaForzada ( posicion &p, secuencia s ) {
 // EJERCICIO 9
 int seVieneElJaqueEn ( posicion const & p ) {
     int resp = -1;
-    // completar codigo
+    resp = jaqueEnKs(p);
     return resp;
 }

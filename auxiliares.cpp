@@ -731,6 +731,97 @@ posicion SecuenciaForzada(posicion p, secuencia s){
     return seq[seq.size() -1];
 }
 
+//9
+
+typedef pair < posicion, int > nodo;
+typedef pair < coordenada , coordenada > parCoordenadas;
+
+vector <parCoordenadas> ObtenerCoorMovimientoValidoJug(posicion p){
+    vector <parCoordenadas> par;
+
+    for(int i = 0; i<DIM;i++){
+        for(int j = 0; j < DIM; j++) {
+            coordenada o = make_pair(i, j);
+            for (int x = 0; x < DIM; x++) {
+                for (int y = 0; y < DIM; y++) {
+                    coordenada d = setCoord(x,y);
+                    if(color(p.first, o) == p.second && esJugadaLegal(p, o, d)){
+                        par.push_back(make_pair(o, d));
+                    }
+                }
+            }
+        }
+    }
+    return par;
+}
+
+
+int jaqueEnKs(posicion p){
+
+    vector<nodo> columna0;
+    columna0.push_back(make_pair( p, 0));
+
+    //primera serie de nodos
+    vector<nodo> columna1;
+    vector< parCoordenadas> par1 = ObtenerCoorMovimientoValidoJug(p);
+    for(int i = 0; i<par1.size(); i++){
+        posicion pAux1 = PosicionResultanteUnaJugada(p, par1[i].first, par1[i].second);
+        if(!esJaqueMate(pAux1)){
+            columna1.push_back(make_pair(pAux1, 0));
+        }else return 1;
+    }
+
+    //eliminar nodos que no sirven, los negros que no tengan un unico movimiento claro
+    //los "sobrevivientes" se convierten ahora al unico movimiento posible
+    int i = 0;
+    while(i<columna1.size()){
+        vector<coordenada> movibles = ObtenerUnicasCoordenadasForzada(columna1[i].first);
+        if(movibles.size() > 2 || movibles.size() == 0){
+            columna1.erase(columna1.begin() + i);
+        }else if (movibles.size() == 2){
+            columna1[i].first = PosicionResultanteUnaJugada(columna1[i].first, movibles[0], movibles[1]);
+            i++;
+        }
+    }
+
+     //segunda tanda, columna 2
+    vector<nodo> columna2;
+    for(int j=0; j<columna1.size();j++){
+        vector< parCoordenadas> par1 = ObtenerCoorMovimientoValidoJug(columna1[j].first);
+        for(int i = 0; i<par1.size(); i++){
+            posicion pAux1 = PosicionResultanteUnaJugada(columna1[j].first, par1[i].first, par1[i].second);
+            if(!esJaqueMate(pAux1)){
+                columna2.push_back(make_pair(pAux1, 1));
+            }else return 2;
+        }
+    }
+
+    //eliminar nodos que no sirven, los negros que no tengan un unico movimiento claro
+    //los "sobrevivientes" se convierten ahora al unico movimiento posible
+    i = 0;
+    while(i<columna2.size()){
+        vector<coordenada> movibles = ObtenerUnicasCoordenadasForzada(columna2[i].first);
+        if(movibles.size() > 2 || movibles.size() == 0){
+            columna2.erase(columna2.begin() + i);
+        }else if (movibles.size() == 2){
+            columna2[i].first = PosicionResultanteUnaJugada(columna2[i].first, movibles[0], movibles[1]);
+            i++;
+        }
+    }
+
+
+    for(int j=0; j<columna2.size();j++){
+        vector< parCoordenadas> par1 = ObtenerCoorMovimientoValidoJug(columna2[j].first);
+        for(int i = 0; i<par1.size(); i++){
+            posicion pAux1 = PosicionResultanteUnaJugada(columna2[j].first, par1[i].first, par1[i].second);
+            if(esJaqueMate(pAux1)){
+                return 3;
+            }
+        }
+    }
+
+    return -1;
+}
 
 /*
 pred esUnicaMovidaPosibleDeJugador (p: posicion, o: coordenada, d: coordenada) {

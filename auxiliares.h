@@ -40,4 +40,7 @@ bool alMoverQuedaEnJaque(posicion p);
 //8
 posicion SecuenciaForzada(posicion p, secuencia s);
 
+//9
+int jaqueEnKs(posicion p);
+
 #endif //AJEDREZLITE_AUXILIARES_H
