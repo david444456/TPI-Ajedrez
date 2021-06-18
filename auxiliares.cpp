@@ -1,8 +1,6 @@
 #include "definiciones.h"
 #include "auxiliares.h"
 
-//int DIM = 8;
-
 using namespace std;
 /*
 // aqui se pueden ubicar todas las funciones auxiliares de soporte para la resolucion de los ejercicios
@@ -10,10 +8,8 @@ pair<int,int> mp(int a, int b) {
     return make_pair(a, b);
 }*/
 
-// TEST
 vector<pair<int,int>> ordenarVectorPares(vector<pair<int,int>> &v) {
     sort(v.begin(), v.end());
-//    v.erase(unique(v.begin(), v.end()), v.end());
     return v;
 }
 
@@ -24,12 +20,7 @@ coordenada setCoord(int i, int j) {
 tablero tableroActual ( posicion const &p ) {
     return p.first;
 }
-/*
-tablero inicializarTablero(){
-    vector<casilla> fila(ANCHO_TABLERO, cVACIA);
-    tablero out(ANCHO_TABLERO, fila);
-    return out;
-}*/
+
 int contrincante(int j){
     int res= BLANCO;
     if(j==BLANCO){
@@ -37,6 +28,7 @@ int contrincante(int j){
     }
     return res;
 }
+
 bool esMatriz(tablero t){
     bool res = true;
     for(int i = 0; i<t.size(); i++){
@@ -110,8 +102,7 @@ bool esTableroValido(tablero t){
     return res;
 }
 
-///ejerc 2
-
+///ejercicio 2
 bool piezaEnCoordenada(tablero t, coordenada c, int pieza, int color){
     return t[c.first][c.second].first == pieza && t[c.first][c.second].second == color;
 }
@@ -132,87 +123,36 @@ bool piezasEnCoordenadas(tablero t){
     bool resp = true;
 
     //peones
-    for(int i = 1; i<DIM; i++){
+    for(int i = 1; i<ANCHO_TABLERO; i++){
         if(!piezaEnCoordenada(t, make_pair(1,i), PEON, NEGRO)) resp = false;
         if(!piezaEnCoordenada(t, make_pair(6,i), PEON, BLANCO)) resp = false;
     }
 
     //torre
     if(!piezaEnCoordenada(t, make_pair(0,0), TORRE, NEGRO)) resp = false;
-    if(!piezaEnCoordenada(t, make_pair(0,DIM-1), TORRE, NEGRO)) resp = false;
+    if(!piezaEnCoordenada(t, make_pair(0,ANCHO_TABLERO-1), TORRE, NEGRO)) resp = false;
 
     if(!piezaEnCoordenada(t, make_pair(7,0), TORRE, BLANCO)) resp = false;
-    if(!piezaEnCoordenada(t, make_pair(DIM-1,DIM-1), TORRE, BLANCO)) resp = false;
+    if(!piezaEnCoordenada(t, make_pair(ANCHO_TABLERO-1,ANCHO_TABLERO-1), TORRE, BLANCO)) resp = false;
 
     //alfil
 
     if(!piezaEnCoordenada(t, make_pair(0,2), ALFIL, NEGRO)) resp = false;
-    if(!piezaEnCoordenada(t, make_pair(0,DIM-3), ALFIL, NEGRO)) resp = false;
+    if(!piezaEnCoordenada(t, make_pair(0,ANCHO_TABLERO-3), ALFIL, NEGRO)) resp = false;
 
-    if(!piezaEnCoordenada(t, make_pair(DIM-1,2), ALFIL, BLANCO)) resp = false;
-    if(!piezaEnCoordenada(t, make_pair(DIM-1,DIM-3), ALFIL, BLANCO)) resp = false;
+    if(!piezaEnCoordenada(t, make_pair(ANCHO_TABLERO-1,2), ALFIL, BLANCO)) resp = false;
+    if(!piezaEnCoordenada(t, make_pair(ANCHO_TABLERO-1,ANCHO_TABLERO-3), ALFIL, BLANCO)) resp = false;
 
     //rey
+
     if(!piezaEnCoordenada(t, make_pair(0,4), REY, NEGRO)) resp = false;
-    if(!piezaEnCoordenada(t, make_pair(DIM-1,4), REY, BLANCO)) resp = false;
+    if(!piezaEnCoordenada(t, make_pair(ANCHO_TABLERO-1,4), REY, BLANCO)) resp = false;
 
     return resp;
 }
 
-//ejer 5
-//se considero que en caso de haber mas de dos piezas del mismo tipo y dintisto color, ibamos a colocar primero
-//las blancas y despues las negras, considerandos siempre primero el orden de valor de la pieza.
-void ObtenerTableroOrdenado(tablero& t){
-    //preparo
-    vector<int> auxCount(DIM-1, 0);
+//ejercicio 3
 
-    vector<vector<int>> colorCount;
-    vector<int> maxColor (3, 0);
-
-    for(int i = 0; i< DIM-1; i++){
-        colorCount.push_back(maxColor);
-    }
-
-    //funcionamiento metodo
-    for(int i = 0; i<t.size(); i++){
-        //counting
-        for(int j = 0; j < t[0].size(); j++){
-            if(t[i][j].first != 0){
-                auxCount[t[i][j].first]++;
-                colorCount[t[i][j].first][t[i][j].second] ++;
-            }
-        }
-        //set
-        int aparPieza = 0;
-
-        for(int j = 0; j < t[i].size(); j++){
-            int aparColor = 1;
-            if(t[i][j].first != 0){
-                while(auxCount[aparPieza] <= 0 && aparPieza < DIM){
-                    aparPieza++;
-                }
-                while(colorCount[aparPieza][aparColor] <= 0 && aparColor < 3){
-                    aparColor++;
-                }
-                t[i][j] = make_pair(aparPieza, aparColor);
-                auxCount[aparPieza]--;
-                colorCount[aparPieza][aparColor]--;
-            }
-        }
-    }
-}
-
-///////ejercicio 3
-
-/*
-bool enRango (int x, int m1, int m2) {
-    return ( m1 < x && x < m2 ) || ( m2 < x && x < m1 );
-}
-
-bool coordenadaEnRango(coordenada c){
-    return 0 <= c.first  && c.first < DIM && 0 <= c.second && c.second < DIM ;
-}
-*/
 
 int abs(int n){
     if(n<0){
@@ -289,16 +229,6 @@ bool capturaPeonValida ( tablero t, coordenada o, coordenada d) {
     return ambos && (blanco || negro);
 }
 
-/*
- * cambie el indexado arriba, porque esta asi en TPI?
-bool capturaPeonValida ( tablero t, coordenada o, coordenada d) {
-    bool ambos  =abs(d.first - o.first) == 1;
-    bool blanco = (color(t, o) == BLANCO && d.second == o.second - 1);
-    bool negro  = (color(t, o) == NEGRO  && d.second == o.second + 1);
-    return ambos && (blanco || negro);
-}
-*/
-
 bool movimientoTorreValido (tablero t, coordenada o, coordenada d) {
 
     bool res = true;
@@ -337,13 +267,13 @@ bool casillaAtacada (tablero t, coordenada o, coordenada d) {
    return  res;
 }
 
-vector<coordenada> obtenerCasillasAtacadas(tablero t,jugador j){
+vector<coordenada> obtenerCasillasAtacadas(tablero t,int j){
     vector <coordenada> cA;
-    for(int x = 0;x < DIM;x++){
-        for(int y = 0;y < DIM;y++){
+    for(int x = 0;x < ANCHO_TABLERO;x++){
+        for(int y = 0;y < ANCHO_TABLERO;y++){
             coordenada c = setCoord(x,y);
-            for(int a =0;a < DIM;a++){
-                for(int b=0;b < DIM;b++){
+            for(int a =0;a < ANCHO_TABLERO;a++){
+                for(int b=0;b < ANCHO_TABLERO;b++){
                     coordenada o = setCoord(a,b);
 
                     bool pa = (c!=o);
@@ -362,12 +292,12 @@ vector<coordenada> obtenerCasillasAtacadas(tablero t,jugador j){
     return cA;
 }
 
-///////fin ejercicio 3
 
-//ej 4
+
+//ejercicio 4
 
 bool enLineaFinalInicial(coordenada c){
-    return (c.first==0 || c.first==DIM-1);
+    return (c.first==0 || c.first==ANCHO_TABLERO-1);
 }
 
 bool piezaCorrectaEnDestino(posicion p, posicion q, coordenada o, coordenada d){
@@ -409,8 +339,8 @@ bool pertenece(vector<coordenada>c,coordenada d){
 
 bool posicionesIgualesExceptoEn (posicion p, posicion q,vector<coordenada> C) {
     bool res = false;
-    for (int x = 0; x < DIM; x++) {
-        for (int y = 0; y < DIM; y++) {
+    for (int x = 0; x < ANCHO_TABLERO; x++) {
+        for (int y = 0; y < ANCHO_TABLERO; y++) {
             coordenada c = setCoord(x, y);
             if (!pertenece(C,c)) {
                 if (pieza(p.first, c) == pieza(q.first, c) && color(p.first, c) == color(q.first, c)) {
@@ -428,18 +358,59 @@ bool posicionSiguiente (posicion p, posicion q, coordenada o, coordenada d){
     ca.push_back(o);
     ca.push_back(d);
 
-    bool da= posicionesIgualesExceptoEn(p, q, ca);
-    bool db= casillaVacia(q.first,o);
-    bool dc= esMovimientoValido(p,o,d);
+    bool posIguales = posicionesIgualesExceptoEn(p, q, ca);
+    bool casVacia = casillaVacia(q.first,o);
+    bool movimientoValido = esMovimientoValido(p,o,d);
 
-    bool dd= esCapturaValida(p,o,d);
-    bool de= piezaCorrectaEnDestino(p,q,o,d);
+    bool capturaValida= esCapturaValida(p,o,d);
+    bool destinoCorrecto= piezaCorrectaEnDestino(p,q,o,d);
 
-    return (da && db && dc ) ||(dd && de);
+    return (posIguales && casVacia && movimientoValido ) || (capturaValida && destinoCorrecto);
 }
 
-///ejer 6
-//pre: o a d es movimiento valido o captura valida
+//ejercicio 5
+
+void ObtenerTableroOrdenado(tablero& t){
+    vector<int> auxCount(ANCHO_TABLERO-1, 0);
+
+    vector<vector<int>> colorCount;
+    vector<int> maxColor (3, 0);
+
+    for(int i = 0; i< ANCHO_TABLERO-1; i++){
+        colorCount.push_back(maxColor);
+    }
+
+    //funcionamiento metodo
+    for(int i = 0; i<t.size(); i++){
+        //counting
+        for(int j = 0; j < t[0].size(); j++){
+            if(t[i][j].first != 0){
+                auxCount[t[i][j].first]++;
+                colorCount[t[i][j].first][t[i][j].second] ++;
+            }
+        }
+
+        int aparPieza = 0;
+
+        for(int j = 0; j < t[i].size(); j++){
+            int aparColor = 1;
+            if(t[i][j].first != 0){
+                while(auxCount[aparPieza] <= 0 && aparPieza < ANCHO_TABLERO){
+                    aparPieza++;
+                }
+                while(colorCount[aparPieza][aparColor] <= 0 && aparColor < 3){
+                    aparColor++;
+                }
+                t[i][j] = make_pair(aparPieza, aparColor);
+                auxCount[aparPieza]--;
+                colorCount[aparPieza][aparColor]--;
+            }
+        }
+    }
+}
+
+///ejercicio 6
+
 posicion seConvierteEnPosicion(posicion p, coordenada o, coordenada d){
     posicion t = p;
 
@@ -458,7 +429,6 @@ posicion seConvierteEnPosicion(posicion p, coordenada o, coordenada d){
 bool loPoneEnjaque (posicion p, coordenada o, coordenada d){
     bool res = false;
     posicion q = seConvierteEnPosicion(p,o,d);
-    //q.second = contrincante(p.second);
     res = posicionSiguiente(p,q,o,d) && jugadorEnJaque(q,p.second); //&& p.second==q.second
 
     return res;
@@ -471,11 +441,11 @@ bool esJugadaLegal (posicion p, coordenada o, coordenada d){
 
 bool existeMovimientoParaSalirDelJaque(posicion p){
     bool res = false;
-    for(int x = 0;x < DIM;x++) {
-        for (int y = 0; y < DIM; y++) {
+    for(int x = 0;x < ANCHO_TABLERO;x++) {
+        for (int y = 0; y < ANCHO_TABLERO; y++) {
             coordenada o = setCoord(x, y);
-            for(int i = 0; i<DIM;i++){
-                for(int j = 0; j<DIM;j++){
+            for(int i = 0; i<ANCHO_TABLERO;i++){
+                for(int j = 0; j<ANCHO_TABLERO;j++){
                     coordenada d = setCoord(i, j);
                     if(color(p.first, o) == p.second && esJugadaLegal(p, o, d)){
                         res = true;
@@ -499,8 +469,8 @@ bool esJaqueMate(posicion p){
 
 bool atacaAlRey (posicion p, coordenada o){
     bool res=false;
-    for(int x = 0;x < DIM;x++) {
-        for (int y = 0; y < DIM; y++) {
+    for(int x = 0;x < ANCHO_TABLERO;x++) {
+        for (int y = 0; y < ANCHO_TABLERO; y++) {
             coordenada d = setCoord(x,y);
             bool a =pieza(p.first,d)==REY;
             bool b =color(p.first,d)==p.second;
@@ -513,7 +483,7 @@ bool atacaAlRey (posicion p, coordenada o){
     return res;
 }
 
-bool jugadorEnJaque (posicion p, jugador jug) {
+bool jugadorEnJaque (posicion p, int jug) {
     bool res = false;
     posicion q = p;
     q.second = jug;
@@ -554,8 +524,8 @@ bool noHayMovimientosLegales (posicion p){
 
 bool soloHayReyes (tablero t){
     bool res=true;
-    for(int x = 0;x < DIM;x++){
-        for(int y = 0;y < DIM;y++){
+    for(int x = 0;x < ANCHO_TABLERO;x++){
+        for(int y = 0;y < ANCHO_TABLERO;y++){
             coordenada c = setCoord(x,y);
                 if (!(casillaVacia(t,c) || pieza(t,c) == REY)){
                     res = false;
@@ -576,16 +546,16 @@ bool esEmpate (posicion p){
     return res;
 }
 
-/////////ejercicio 7
+//ejercicio 7
 
 bool alMoverQuedaEnJaque(posicion p){
     bool res = false;
 
-    for(int i = 0; i<DIM;i++){
-        for(int j = 0; j < DIM; j++){
+    for(int i = 0; i<ANCHO_TABLERO;i++){
+        for(int j = 0; j < ANCHO_TABLERO; j++){
             coordenada o = make_pair(i,j);
-            for(int x = 0; x < DIM; x++){
-                for(int y = 0; y<DIM; y++){
+            for(int x = 0; x < ANCHO_TABLERO; x++){
+                for(int y = 0; y<ANCHO_TABLERO; y++){
                     coordenada d = setCoord(x,y);
 
                     posicion q = seConvierteEnPosicion(p, o, d);
@@ -602,7 +572,7 @@ bool alMoverQuedaEnJaque(posicion p){
     return res;
 }
 
-//ejerci 8
+//ejercicio 8
 
 posicion PosicionResultanteUnaJugada(posicion p, coordenada o, coordenada d){
     posicion res = seConvierteEnPosicion(p,o,d);
@@ -612,11 +582,11 @@ posicion PosicionResultanteUnaJugada(posicion p, coordenada o, coordenada d){
 
 vector <coordenada> ObtenerUnicasCoordenadasForzada(posicion p){
     vector <coordenada> movibles;
-    for(int i = 0; i<DIM;i++){
-        for(int j = 0; j < DIM; j++) {
+    for(int i = 0; i<ANCHO_TABLERO;i++){
+        for(int j = 0; j < ANCHO_TABLERO; j++) {
             coordenada o = make_pair(i, j);
-            for (int x = 0; x < DIM; x++) {
-                for (int y = 0; y < DIM; y++) {
+            for (int x = 0; x < ANCHO_TABLERO; x++) {
+                for (int y = 0; y < ANCHO_TABLERO; y++) {
                     coordenada d = setCoord(x,y);
                     if(color(p.first, o) == p.second && esJugadaLegal(p, o, d)){
                         movibles.push_back(o);
@@ -644,7 +614,7 @@ posicion SecuenciaForzada(posicion p, secuencia s){
     return seq[seq.size() -1];
 }
 
-//9
+//ejercicio 9
 
 typedef pair < posicion, int > nodo;
 typedef pair < coordenada , coordenada > parCoordenadas;
@@ -652,11 +622,11 @@ typedef pair < coordenada , coordenada > parCoordenadas;
 vector <parCoordenadas> ObtenerCoorMovimientoValidoJug(posicion p){
     vector <parCoordenadas> par;
 
-    for(int i = 0; i<DIM;i++){
-        for(int j = 0; j < DIM; j++) {
+    for(int i = 0; i<ANCHO_TABLERO;i++){
+        for(int j = 0; j < ANCHO_TABLERO; j++) {
             coordenada o = make_pair(i, j);
-            for (int x = 0; x < DIM; x++) {
-                for (int y = 0; y < DIM; y++) {
+            for (int x = 0; x < ANCHO_TABLERO; x++) {
+                for (int y = 0; y < ANCHO_TABLERO; y++) {
                     coordenada d = setCoord(x,y);
                     if(color(p.first, o) == p.second && esJugadaLegal(p, o, d)){
                         par.push_back(make_pair(o, d));
@@ -722,7 +692,7 @@ int jaqueEnKs(posicion p){
         }
     }
 
-
+//tercer conjunt
     for(int j=0; j<columna2.size();j++){
         vector< parCoordenadas> par1 = ObtenerCoorMovimientoValidoJug(columna2[j].first);
         for(int i = 0; i<par1.size(); i++){

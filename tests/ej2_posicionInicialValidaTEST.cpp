@@ -50,6 +50,21 @@ TEST(posicionInicialValidaTEST, tableroInCorrectoAlReves){
     EXPECT_FALSE(posicionInicial(p));
 }
 
+TEST(posicionInicialValidaTEST, tableroInCorrectoPiezasIncorrectas){
+    tablero t = {
+            {cTORRE_B,  cVACIA,     cALFIL_B,   cVACIA,     cREY_B,     cALFIL_B,   cVACIA,     cTORRE_B},
+            {cPEON_B,   cPEON_B,    cPEON_B,    make_pair(1,3),    cPEON_B,    cPEON_B,    cPEON_B,    cPEON_B},
+            {cVACIA,    cVACIA,     cVACIA,    cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA},
+            {cVACIA,    cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA},
+            {cVACIA,    cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA},
+            {cVACIA,    cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA},
+            {cPEON_N,   cPEON_N,    cPEON_N,     cPEON_N,    make_pair(6,4),    cPEON_N,    cPEON_N,    cPEON_N},
+            {cTORRE_N,  cVACIA,     cALFIL_N,   cVACIA,     cREY_N,     cALFIL_N,   cVACIA,     cTORRE_N},
+    };
+    posicion p = make_pair(t,BLANCO);
+    EXPECT_FALSE(posicionInicial(p));
+}
+
 TEST(posicionInicialValidaTEST, tableroInCorrectoLeSobraUnaPieza){
     tablero t = {
             {cTORRE_N,  cVACIA,     cALFIL_N,   cPEON_N,     cREY_N,     cALFIL_N,   cVACIA,     cTORRE_N},

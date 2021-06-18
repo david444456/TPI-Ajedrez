@@ -39,6 +39,39 @@ TEST(ejecutarSecuenciaForzadaTEST, secuenciaForzada) {
     EXPECT_EQ(p_fin, p);
 }
 
+TEST(ejecutarSecuenciaForzadaTEST, secuenciaForzadaColorOpuesto) {
+    tablero t = {	// Figura 5 del enunciado del TPE
+            {cTORRE_N, cVACIA, cVACIA, cVACIA, cREY_N, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cTORRE_N, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cPEON_N, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cREY_B, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cPEON_N, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+    };
+    posicion p = make_pair(t, NEGRO);
+    secuencia s = {
+            make_pair(make_pair(1,4),make_pair(1,1)), make_pair(make_pair(3,0),make_pair(4,0)),
+            make_pair(make_pair(4,0),make_pair(5,0)), make_pair(make_pair(6,5),make_pair(7,5))
+    };
+
+    tablero t_fin = {
+            {cTORRE_N, cVACIA, cVACIA, cVACIA, cREY_N, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cTORRE_N, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cPEON_N, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cREY_B, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cTORRE_N, cVACIA, cVACIA},
+    };
+    posicion p_fin = make_pair(t_fin, NEGRO);
+
+    ejecutarSecuenciaForzada(p, s);
+    EXPECT_EQ(p_fin, p);
+}
+
 
 TEST(ejecutarSecuenciaForzadaTEST, secuenciaForzadaTerminaEmpate) {
     tablero t = {
