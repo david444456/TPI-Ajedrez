@@ -94,3 +94,33 @@ TEST(posicionInicialValidaTEST, tableroInCorrectoTodoNegrosAfuera){
     posicion p = make_pair(t,BLANCO);
     EXPECT_FALSE(posicionInicial(p));
 }
+
+TEST(posicionValidaTEST_Sorondo, casillaInvalidaConJugadorPeroSinPieza) {
+    tablero t = {
+            {make_pair(VACIO, NEGRO), cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cREY_N, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cREY_B, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+    };
+    posicion p = make_pair(t, 1);
+    EXPECT_FALSE(posicionInicial(p));
+}
+
+TEST(posicionValidaTEST_Sorondo, casillaInvalidaSinJugadorPeroConPieza) {
+    tablero t = {
+            {make_pair(TORRE, VACIO), cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cREY_N, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cREY_B, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+    };
+    posicion p = make_pair(t, 1);
+    EXPECT_FALSE(posicionInicial(p));
+}
