@@ -218,7 +218,7 @@ bool movimientoReyValido (coordenada o, coordenada d){
 }
 
 bool movimientoPeonValido (int color, coordenada o, coordenada d) {
-    return d.second == o.second && ((color == BLANCO && d.first == o.first - 1) || (color = NEGRO && d.first == o.first + 1));
+    return d.second == o.second && ((color == BLANCO && d.first == o.first - 1) || (color == NEGRO && d.first == o.first + 1));
 }
 
 bool capturaPeonValida ( tablero t, coordenada o, coordenada d) {
@@ -548,6 +548,26 @@ bool esEmpate (posicion p){
 
 //ejercicio 7
 
+bool jugadorEnJaqueExcluyendoD (posicion p, int jug, coordenada d) {
+    bool res = false;
+    posicion q = p;
+    q.second = jug;
+    for(int i = 0; i<p.first.size();i++){
+        for(int j =0; j <p.first[i].size();j++){
+            coordenada o = setCoord(i, j);
+            if( o != d) {
+                bool da = (color(q.first, o) == contrincante(jug));
+                bool db = atacaAlRey(q, o);
+
+                if (da && db) {
+                    res = true;
+                }
+            }
+        }
+    }
+    return res;
+}
+
 bool alMoverQuedaEnJaque(posicion p){
     bool res = false;
 
@@ -561,7 +581,7 @@ bool alMoverQuedaEnJaque(posicion p){
                     posicion q = seConvierteEnPosicion(p, o, d);
                     q.second= contrincante(p.second);
 
-                    if(posicionSiguiente(p, q, o, d) && jugadorEnJaque(q, q.second)){
+                    if(posicionSiguiente(p, q, o, d) && jugadorEnJaqueExcluyendoD(q, q.second, d)){
                         res= true;
                     }
                 }

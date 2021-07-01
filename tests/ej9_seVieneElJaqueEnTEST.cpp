@@ -73,7 +73,7 @@ TEST(seVieneElJaqueEnTEST, noHayMateEn1) {
     };
     posicion p = make_pair(t, NEGRO);
 
-    int K_esperado = -1;
+    int K_esperado = 2;
 
     EXPECT_EQ(K_esperado, seVieneElJaqueEn(p));
 }

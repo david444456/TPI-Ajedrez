@@ -18,6 +18,8 @@ bool esJugadaLegal(posicion p, coordenada o, coordenada d);
 
 bool cantidadDePiezasAlInicio(tablero t);
 
+bool piezasEnCoordenadas(tablero t);
+
 //3
 bool esCapturaValida(posicion p, coordenada o, coordenada d);
 int contrincante(int j);
