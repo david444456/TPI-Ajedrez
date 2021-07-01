@@ -43,9 +43,8 @@ bool casillasValidas(tablero t){
     bool res = true;
     for(int i = 0; i<t.size(); i++){
         for(int j = 0; j<t[i].size(); j++){
-            if ((t[i][j].first < 1 && t[i][j].first > 4
-                && t[i][j].second < 1 && t[i][j].second > 2)
-                && !(t[i][j].first == 0 && t[i][j].second == 0)){
+
+            if ( !(cVACIA == t[i][j] || ( 0 < t[i][j].first && t[i][j].first < 5 && 0 < t[i][j].second && t[i][j].second < 3 ))){
                 res = false;
             }
         }
@@ -302,13 +301,14 @@ bool enLineaFinalInicial(coordenada c){
 
 bool piezaCorrectaEnDestino(posicion p, posicion q, coordenada o, coordenada d){
 
-    bool da = color(p.first,d)==color(q.first,d);
+    bool da = color(p.first,o)==color(q.first,d);
     bool db = enLineaFinalInicial(d);
-    bool dc = pieza(q.first,d)==TORRE;
+    bool dc1 = pieza(q.first,d)==TORRE;
+    bool dc2 = pieza(p.first,o)==PEON;
     bool de = !enLineaFinalInicial(d);
     bool df = pieza(q.first,d) == pieza(p.first,o);
 
-    return ( da && (db && dc) || (de && df));
+    return da && ((db && dc1 && dc2) || (de && df));
 }
 
 bool esCapturaValida(posicion p, coordenada o,coordenada d){

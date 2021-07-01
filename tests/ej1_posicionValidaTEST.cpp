@@ -119,3 +119,35 @@ TEST(posicionValidaTEST, trestorresnegras) {
     posicion p = make_pair(t, 1);
     EXPECT_FALSE(posicionValida(p));
 }
+
+
+TEST(posicionValidaTEST, sorondo_casillaInvalidaConJugadorPeroSinPieza) {
+    tablero t = {
+            {make_pair(VACIO, NEGRO), cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cREY_N, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cREY_B, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+    };
+    posicion p = make_pair(t, 1);
+    EXPECT_FALSE(posicionValida(p));
+}
+
+TEST(posicionValidaTEST, sorondo_casillaInvalidaSinJugadorPeroConPieza) {
+    tablero t = {
+            {make_pair(TORRE, VACIO), cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cREY_N, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cREY_B, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+            {cVACIA,                  cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA, cVACIA},
+    };
+    posicion p = make_pair(t, 1);
+
+    EXPECT_FALSE(posicionValida(p));
+}
