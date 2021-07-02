@@ -8,6 +8,8 @@ pair<int,int> mp(int a, int b) {
     return make_pair(a, b);
 }*/
 
+/// ejercicio 1
+
 vector<pair<int,int>> ordenarVectorPares(vector<pair<int,int>> &v) {
     sort(v.begin(), v.end());
     return v;
@@ -150,7 +152,7 @@ bool piezasEnCoordenadas(tablero t){
     return resp;
 }
 
-//ejercicio 3
+/// ejercicio 3
 
 
 int abs(int n){
@@ -293,22 +295,37 @@ vector<coordenada> obtenerCasillasAtacadas(tablero t,int j){
 
 
 
-//ejercicio 4
+/// ejercicio 4
 
 bool enLineaFinalInicial(coordenada c){
     return (c.first==0 || c.first==ANCHO_TABLERO-1);
 }
 
 bool piezaCorrectaEnDestino(posicion p, posicion q, coordenada o, coordenada d){
-
+    /*
+    primera correccion
     bool da = color(p.first,o)==color(q.first,d);
     bool db = enLineaFinalInicial(d);
     bool dc1 = pieza(q.first,d)==TORRE;
     bool dc2 = pieza(p.first,o)==PEON;
     bool de = !enLineaFinalInicial(d);
     bool df = pieza(q.first,d) == pieza(p.first,o);
-
     return da && ((db && dc1 && dc2) || (de && df));
+    */
+
+    /*
+    segunda correccion
+    bool Color = color(p.first,o)==color(q.first,d);
+    bool lineaFinal = enLineaFinalInicial(d);
+    bool aTorre = pieza(q.first,d)==TORRE;
+    bool peon = pieza(p.first,o)==PEON;
+    bool Pieza = pieza(q.first,d) == pieza(p.first,o);
+
+    return Color && ((peon && lineaFinal && aTorre) || (!(peon && lineaFinal) && Pieza));
+    */
+
+    return color(p.first,o)==color(q.first,d) && ((pieza(p.first,o)==PEON && enLineaFinalInicial(d) && pieza(q.first,d)==TORRE) || (!(pieza(p.first,o)==PEON && enLineaFinalInicial(d)) && pieza(q.first,d) == pieza(p.first,o)));
+
 }
 
 bool esCapturaValida(posicion p, coordenada o,coordenada d){
@@ -357,18 +374,24 @@ bool posicionSiguiente (posicion p, posicion q, coordenada o, coordenada d){
     vector<coordenada> ca;
     ca.push_back(o);
     ca.push_back(d);
-
+    /*
     bool posIguales = posicionesIgualesExceptoEn(p, q, ca);
     bool casVacia = casillaVacia(q.first,o);
-    bool movimientoValido = esMovimientoValido(p,o,d);
-
-    bool capturaValida= esCapturaValida(p,o,d);
     bool destinoCorrecto= piezaCorrectaEnDestino(p,q,o,d);
 
+    bool movimientoValido = esMovimientoValido(p,o,d);
+    bool capturaValida= esCapturaValida(p,o,d);
+
+    primera version del return
     return (posIguales && casVacia && movimientoValido ) || (capturaValida && destinoCorrecto);
+    segunda version del return
+    return posIguales && casVacia && (movimientoValido  || capturaValida) && destinoCorrecto;
+    */
+
+    return posicionesIgualesExceptoEn(p, q, ca) && casillaVacia(q.first,o) && (esMovimientoValido(p,o,d)  || esCapturaValida(p,o,d)) && piezaCorrectaEnDestino(p,q,o,d);
 }
 
-//ejercicio 5
+/// ejercicio 5
 
 void ObtenerTableroOrdenado(tablero& t){
     vector<int> auxCount(ANCHO_TABLERO-1, 0);
@@ -409,7 +432,7 @@ void ObtenerTableroOrdenado(tablero& t){
     }
 }
 
-///ejercicio 6
+/// ejercicio 6
 
 posicion seConvierteEnPosicion(posicion p, coordenada o, coordenada d){
     posicion t = p;
@@ -427,16 +450,28 @@ posicion seConvierteEnPosicion(posicion p, coordenada o, coordenada d){
 }
 
 bool loPoneEnjaque (posicion p, coordenada o, coordenada d){
-    bool res = false;
-    posicion q = seConvierteEnPosicion(p,o,d);
-    res = posicionSiguiente(p,q,o,d) && jugadorEnJaque(q,p.second); //&& p.second==q.second
 
+    posicion q = seConvierteEnPosicion(p,o,d);
+    /*
+    bool PosicionSiguiente = posicionSiguiente(p,q,o,d);
+    bool JugadorEnJaque = jugadorEnJaque(q,p.second);
+    bool res = PosicionSiguiente && JugadorEnJaque; //&& p.second==q.second
     return res;
+     */
+
+    return posicionSiguiente(p,q,o,d) && jugadorEnJaque(q,p.second);
 }
 
 bool esJugadaLegal (posicion p, coordenada o, coordenada d){
-    bool res= (esMovimientoValido(p,o,d) || esCapturaValida(p,o,d)) && !loPoneEnjaque(p,o,d);
+    /*
+    bool MovimientoValido = esMovimientoValido(p,o,d);
+    bool CapturaValida = esCapturaValida(p,o,d);
+    bool PoneEnJaque = loPoneEnjaque(p,o,d);
+    bool res= ( MovimientoValido || CapturaValida) && !PoneEnJaque;
     return res;
+    */
+
+    return ( esMovimientoValido(p,o,d) || esCapturaValida(p,o,d) ) && !loPoneEnjaque(p,o,d) ;
 }
 
 bool existeMovimientoParaSalirDelJaque(posicion p){
@@ -458,13 +493,14 @@ bool existeMovimientoParaSalirDelJaque(posicion p){
 }
 
 bool esJaqueMate(posicion p){
-    bool res = false;
-
-    res = jugadorEnJaque(p, p.second);
-
-    res = res && !existeMovimientoParaSalirDelJaque(p);
-
+    /*
+    bool JugadorEnJaque = jugadorEnJaque(p, p.second);
+    bool ExisteUnMovimientoParaSalirDelJaque = existeMovimientoParaSalirDelJaque(p);
+    bool res = JugadorEnJaque && !ExisteUnMovimientoParaSalirDelJaque;
     return res;
+    */
+
+    return jugadorEnJaque(p, p.second) && !existeMovimientoParaSalirDelJaque(p);
 }
 
 bool atacaAlRey (posicion p, coordenada o){
@@ -472,10 +508,15 @@ bool atacaAlRey (posicion p, coordenada o){
     for(int x = 0;x < ANCHO_TABLERO;x++) {
         for (int y = 0; y < ANCHO_TABLERO; y++) {
             coordenada d = setCoord(x,y);
+            /*
             bool a =pieza(p.first,d)==REY;
             bool b =color(p.first,d)==p.second;
             bool c = esCapturaValida(p,o,d);
             if(a && b && c){
+                res=true;
+            }
+            */
+            if(pieza(p.first,d)==REY && color(p.first,d)==p.second && esCapturaValida(p,o,d)){
                 res=true;
             }
         }
@@ -490,12 +531,18 @@ bool jugadorEnJaque (posicion p, int jug) {
     for(int i = 0; i<p.first.size();i++){
         for(int j =0; j <p.first[i].size();j++){
             coordenada o = setCoord(i,j);
+            /*
             bool da = (color(q.first,o)== contrincante(jug));
             bool db = atacaAlRey(q,o);
-
             if( da && db){
                 res = true;
             }
+            */
+
+            if( (color(q.first,o)== contrincante(jug)) && atacaAlRey(q,o)){
+                res = true;
+            }
+
         }
     }
     return res;
@@ -536,17 +583,19 @@ bool soloHayReyes (tablero t){
 }
 
 bool esEmpate (posicion p){
+    /*
     bool a = soloHayReyes(p.first);
     bool c = !jugadorEnJaque(p,p.second);
     bool d = noHayMovimientosLegales(p);
 
-    bool b = (c && d);
-
-    bool res =  a || (b);
+    bool res =  a || (c && d);
     return res;
+    */
+
+    return soloHayReyes(p.first) || ( !jugadorEnJaque(p,p.second) && noHayMovimientosLegales(p));
 }
 
-//ejercicio 7
+/// ejercicio 7
 
 bool jugadorEnJaqueExcluyendoD (posicion p, int jug, coordenada d) {
     bool res = false;
@@ -556,12 +605,17 @@ bool jugadorEnJaqueExcluyendoD (posicion p, int jug, coordenada d) {
         for(int j =0; j <p.first[i].size();j++){
             coordenada o = setCoord(i, j);
             if( o != d) {
+                /*
                 bool da = (color(q.first, o) == contrincante(jug));
                 bool db = atacaAlRey(q, o);
-
                 if (da && db) {
                     res = true;
                 }
+                */
+                if ( (color(q.first, o) == contrincante(jug)) && atacaAlRey(q, o)) {
+                    res = true;
+                }
+
             }
         }
     }
@@ -592,7 +646,7 @@ bool alMoverQuedaEnJaque(posicion p){
     return res;
 }
 
-//ejercicio 8
+/// ejercicio 8
 
 posicion PosicionResultanteUnaJugada(posicion p, coordenada o, coordenada d){
     posicion res = seConvierteEnPosicion(p,o,d);
@@ -634,7 +688,7 @@ posicion SecuenciaForzada(posicion p, secuencia s){
     return seq[seq.size() -1];
 }
 
-//ejercicio 9
+/// ejercicio 9
 
 typedef pair < posicion, int > nodo;
 typedef pair < coordenada , coordenada > parCoordenadas;

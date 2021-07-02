@@ -135,3 +135,35 @@ TEST(posicionSiguienteCorrectaTEST_Blufstein, peonSeCoronaComiendoUnaPieza){
 
     EXPECT_TRUE(posicionSiguienteCorrecta(p_1,p_2,o,d));
 }
+
+TEST(posicionSiguienteCorrectaTEST, peonNoCoronado){
+    tablero t_p = {
+            {cVACIA,    cVACIA,     cALFIL_N,   cVACIA,     cREY_N,     cVACIA,   cVACIA,     cVACIA},
+            {cVACIA,    cPEON_N,    cVACIA,    cVACIA,      cPEON_N,    cPEON_N,    cPEON_B,    cVACIA},
+            {cVACIA,    cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA},
+            {cTORRE_N,  cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA},
+            {cVACIA,    cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,   cVACIA,     cVACIA},
+            {cVACIA,    cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA},
+            {cPEON_B,   cPEON_B,    cPEON_B,    cVACIA,     cVACIA,     cPEON_B,    cVACIA,    cPEON_B},
+            {cTORRE_B,  cVACIA,     cALFIL_B,   cVACIA,     cREY_B,     cALFIL_B,   cVACIA,     cTORRE_B},
+    };
+
+    tablero t_q = {
+            {cVACIA,    cVACIA,     cALFIL_N,   cVACIA,     cREY_N,     cVACIA,   cPEON_B,     cVACIA},
+            {cVACIA,    cPEON_N,    cVACIA,    cVACIA,      cPEON_N,    cPEON_N,    cVACIA,    cVACIA},
+            {cVACIA,    cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA},
+            {cTORRE_N,  cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA},
+            {cVACIA,    cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,   cVACIA,     cVACIA},
+            {cVACIA,    cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA,     cVACIA},
+            {cPEON_B,   cPEON_B,    cPEON_B,    cVACIA,     cVACIA,     cPEON_B,    cVACIA,    cPEON_B},
+            {cTORRE_B,  cVACIA,     cALFIL_B,   cVACIA,     cREY_B,     cALFIL_B,   cVACIA,     cTORRE_B},
+    };
+
+    posicion p = make_pair(t_p,BLANCO);
+    posicion q = make_pair(t_q,NEGRO);
+
+    coordenada o = setCoord(1,6);
+    coordenada d = setCoord(0,6);
+
+    EXPECT_FALSE(posicionSiguienteCorrecta(p,q,o,d));
+}
