@@ -59,21 +59,3 @@ TEST(seVieneElJaqueEnTEST, hayMateEn1) {
 
     EXPECT_EQ(K_esperado, seVieneElJaqueEn(p));
 }
-
-TEST(seVieneElJaqueEnTEST, noHayMateEn1) {
-    tablero t = {
-            {cVACIA, cVACIA,  cVACIA,   cVACIA, cREY_N,   cVACIA, cVACIA, cVACIA},
-            {cVACIA, cVACIA,  cVACIA,   cVACIA, cVACIA,   cVACIA, cVACIA, cVACIA},
-            {cVACIA, cVACIA,  cTORRE_N, cVACIA, cALFIL_N, cVACIA, cVACIA, cVACIA},
-            {cVACIA, cVACIA,  cVACIA,   cVACIA, cVACIA,   cVACIA, cVACIA, cVACIA},
-            {cVACIA, cVACIA,  cVACIA,   cVACIA, cVACIA,   cVACIA, cVACIA, cVACIA},
-            {cVACIA, cPEON_N, cPEON_B,  cVACIA, cVACIA,   cVACIA, cVACIA, cVACIA},
-            {cVACIA, cPEON_B, cVACIA,   cVACIA, cVACIA,   cVACIA, cVACIA, cVACIA},
-            {cREY_B, cVACIA,  cVACIA,   cVACIA, cVACIA,   cVACIA, cVACIA, cVACIA},
-    };
-    posicion p = make_pair(t, NEGRO);
-
-    int K_esperado = 2;
-
-    EXPECT_EQ(K_esperado, seVieneElJaqueEn(p));
-}
